@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../components/ui/card"
+} from "../Components/ui/card"
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllReviews } from "../common/reviewSlice";
 import { fetchGames } from "../common/gameSlice";

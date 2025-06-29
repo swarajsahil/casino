@@ -8,7 +8,7 @@ import { useIsMobile } from "../../hooks/use-mobile"
 import { cn } from "../../lib/utils"
 import { Button } from "../../Components/ui/button"
 import { Input } from "../../Components/ui/input"
-import { Separator } from "../../Components/ui/separator"
+import { Separator } from "../../components/ui/separator"
 import {
   Sheet,
   SheetContent,
