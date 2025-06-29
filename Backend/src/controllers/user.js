@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { User } from "../models/user.js";
 import { sendCookie } from "../utils/cookies.js";
 import ErrorHandler from "../middlewares/error.js";
