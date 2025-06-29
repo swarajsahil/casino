@@ -1,6 +1,6 @@
 import { IconTrendingUp, IconTrendingDown } from "@tabler/icons-react"
 
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "../Components/ui/badge"
 import {
   Card,
   CardAction,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "../components/ui/card"
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllReviews } from "../common/reviewSlice";
 import { fetchGames } from "../common/gameSlice";

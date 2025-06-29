@@ -5,7 +5,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "../components/ui/sidebar"
 import { Link } from "react-router-dom";
 export function NavMain({
   items

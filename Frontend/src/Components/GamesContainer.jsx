@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
-import { useMemo } from "react";
 
 const GamesContainer = () => {
   const API_URL = import.meta.env.VITE_API_URL;
