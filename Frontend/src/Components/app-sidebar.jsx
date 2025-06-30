@@ -10,7 +10,7 @@ import {
 } from "@tabler/icons-react"
 
 import { NavMain } from "../Components/nav-main"
-import { NavUser } from "../components/nav-user"
+import { NavUser } from "../Components/nav-user"
 import {
   Sidebar,
   SidebarContent,
