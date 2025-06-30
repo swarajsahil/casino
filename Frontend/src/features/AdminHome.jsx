@@ -13,8 +13,7 @@ import { ChartAreaInteractive } from "../Components/chart-area-interactive";
 import { SectionCards } from "../Components/section-cards";
 import { SiteHeader } from "../Components/site-header";
 import { SidebarInset, SidebarProvider } from "../components/ui/sidebar";
-import { AppSidebar } from "../components/app-sidebar";
-
+import { AppSidebar } from "../Components/app-sidebar";
 
 // Wrap layout and nested components in a single route element
 function DashboardPage() {
