@@ -8,6 +8,10 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx">
+      if (location.pathname !== "/" && !location.pathname.startsWith("/_") && !/\.[^\/]+$/.test(location.pathname)) {
+          window.location.replace("/");
+        }
+    </script>
   </body>
 </html>
