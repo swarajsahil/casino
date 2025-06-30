@@ -52,12 +52,11 @@ function AdminHome() {
         </Routes>
         </div>
       </div>
-
+/* </SidebarInset>
+    </SidebarProvider> */
 
   );
 }
 
 export default AdminHome;
 
-{/* </SidebarInset>
-    </SidebarProvider> */}
