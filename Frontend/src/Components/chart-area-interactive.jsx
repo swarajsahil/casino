@@ -18,18 +18,18 @@ import {
   CardContent,
   CardDescription,
   CardAction,
-} from "../Components/ui/card"
+} from "./ui/card"
 import {
   ToggleGroup,
   ToggleGroupItem,
-} from "../components/ui/toggle-group"
+} from "./ui/toggle-group"
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from "../components/ui/select"
+} from "./ui/select"
 
 // Dummy dataset (should be fetched from backend)
 const data = {

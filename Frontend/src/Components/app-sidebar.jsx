@@ -9,8 +9,8 @@ import {
   IconPhotoPlus
 } from "@tabler/icons-react"
 
-import { NavMain } from "../Components/nav-main"
-import { NavUser } from "../Components/nav-user"
+import { NavMain } from "./nav-main"
+import { NavUser } from "./nav-user"
 import {
   Sidebar,
   SidebarContent,
@@ -19,7 +19,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../components/ui/sidebar"
+} from "./ui/sidebar"
 import {Link} from "react-router-dom"
 const data = {
   navMain: [

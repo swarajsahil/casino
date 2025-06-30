@@ -3,12 +3,12 @@ import { IconLogout } from "@tabler/icons-react"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
-} from "../Components/ui/dropdown-menu"
+} from "./ui/dropdown-menu"
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../components/ui/sidebar"
+} from "./ui/sidebar"
 import { useNavigate } from "react-router-dom";
 
 

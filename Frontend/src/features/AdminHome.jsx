@@ -9,11 +9,11 @@ import Review from '../pages/Reviews';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Popup from '../pages/Popup';
 
-import { ChartAreaInteractive } from "../Components/chart-area-interactive";
-import { SectionCards } from "../Components/section-cards";
-import { SiteHeader } from "../Components/site-header";
+import { ChartAreaInteractive } from "../components/chart-area-interactive";
+import { SectionCards } from "../components/section-cards";
+import { SiteHeader } from "../components/site-header";
 import { SidebarInset, SidebarProvider } from "../components/ui/sidebar";
-import { AppSidebar } from "../Components/app-sidebar";
+import { AppSidebar } from "../components/app-sidebar";
 
 // Wrap layout and nested components in a single route element
 function DashboardPage() {
