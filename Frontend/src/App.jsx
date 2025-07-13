@@ -29,7 +29,7 @@ import useFetch from './hooks/useFetch';
 import {carouselData} from "./app/constants"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBlogs } from './common/blogSlice';
-import RecentlyUpdatedSection from './components/RecentlyUpdatedSection';
+import RecentlyUpdatedSection from '../src/components/RecentlyUpdatedSection';
 import { fetchFAQs } from './common/faqSlice';
 import BlogCard from './components/BlogCard';
 
