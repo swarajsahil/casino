@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlogs, addBlog, updateBlog, deleteBlog, fetchBlogsById } from "../common/blogSlice";
-import { Routes, Route, Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import {  addBlog, updateBlog, deleteBlog, fetchBlogsById, fetchAllBlogs, approveBlog } from "../common/blogSlice";
+import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 
 const Blog = () => {
   const [editingBlog, setEditingBlog] = useState(null);
+  
   return (
     <div className="p-6">
       <BlogNavbar />
@@ -29,20 +30,24 @@ const BlogNavbar = () => {
 const AdminBlog = ({ editingBlog, setEditingBlog }) => {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
-  const { data: blogs, loading ,error} = useSelector((state) => state.blogs);
+  const { allBlogs, loading ,error} = useSelector((state) => state.blogs);
   // const [editingBlog, setEditingBlog] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchBlogs());
+    dispatch(fetchAllBlogs());
   }, [dispatch]);
 
-  // const handleEdit = (blog) => {
-  //   navigate("/admin/blog/add-blog", { state: { isEdit: true, blog } });
-  // };
+
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this Blog?")) {
     dispatch(deleteBlog(id));
+    }
+  };
+
+  const handleApprove = (id) => {
+    if (window.confirm("Are you sure you want to approve this Review?")) {
+    dispatch(approveBlog(id)).then(() => dispatch(fetchAllBlogs()));
     }
   };
 
@@ -55,7 +60,7 @@ const AdminBlog = ({ editingBlog, setEditingBlog }) => {
         <AddBlog existingBlog={editingBlog} setEditing={setEditingBlog} />
       ) : (
         <ul>
-          {blogs.map((blog, index) => (
+          {allBlogs?.map((blog, index) => (
             <li key={blog._id || index} className="flex justify-between items-center p-2 border-b">
               <div>
                 <h3 className="text-xl">{blog.title}</h3>
@@ -63,6 +68,32 @@ const AdminBlog = ({ editingBlog, setEditingBlog }) => {
               </div>
               
               <div className="flex gap-1 flex-col">
+                  {/* Approve Blog */}
+                <div className="flex flex-col items-center justify-center space-x-2 border border-black rounded-lg p-2">
+                  <div className={`flex items-center justify-center px-3 py-1 rounded-full text-xs font-medium ${blog.approved
+                      ? "bg-green-100 text-green-800"
+                      : "bg-yellow-100 text-yellow-800"
+                    }`}>
+                    {blog.approved ? "Approved" : "Pending"}
+                  </div>
+
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={blog.approved}
+                      onChange={() => handleApprove(blog._id)}
+                      className="sr-only peer"
+                      disabled={blog.approved}
+                    />
+                    <div className={`w-11 h-6 rounded-full peer ${blog.approved
+                        ? "bg-green-500 peer-disabled:bg-green-300"
+                        : "bg-gray-200"
+                      } peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 peer-disabled:opacity-70 peer-disabled:cursor-not-allowed`}>
+                      <div className={`absolute top-0.5 left-[2px] bg-white rounded-full h-5 w-5 transition-all ${blog.approved ? "translate-x-5" : ""
+                        }`}></div>
+                    </div>
+                  </label>
+                </div>
               <div className="bg-red-500 text-white w-18 text-center rounded-2xl">
               <Link 
                   to={`/admin/blog/details/${blog._id}`}>

@@ -3,6 +3,19 @@ import { processData } from "../utils/dataService.js";  // Import processData se
 import ErrorHandler from "../middlewares/error.js";
 import { uploadOnCloudinary , deleteFromCloudinary} from "../utils/cloudinary.js"; 
 // Controller to handle fetching all blogs
+export const unapprovedBlog = async (req, res, next) => {
+    try {
+        // const blogs = await Blog.find({});
+        const blogs = await Blog.find({ approved: true });
+        res.status(200).json({
+            success: true,
+            blogs,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+// Controller to handle fetching all blogs
 export const allBlog = async (req, res, next) => {
     try {
         const blogs = await Blog.find({});
@@ -14,6 +27,7 @@ export const allBlog = async (req, res, next) => {
         next(error);
     }
 };
+
 // Controller to fetch a blog by its ID
 export const getBlogById = async (req, res, next) => {
     try {
@@ -69,7 +83,8 @@ export const newBlog = async (req, res, next) => {
             keyTakeaways: processedKeyTakeaways,
             content: processedContent,
             image,
-            imagePublicId
+            imagePublicId,
+            approved: false, // Default to unapproved
         });
 
         res.status(201).json({
@@ -150,4 +165,25 @@ export const deleteBlog = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
+
+// Approve function
+export const approveBlog = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const blog = await Blog.findByIdAndUpdate(
+      id,
+      { approved: true }, // Approve the review
+      { new: true }
+    );
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.json({ message: "Blog approved successfully", blog });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to approve blog" });
+  }
 };

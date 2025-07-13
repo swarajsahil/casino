@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome,FaBlogger,FaSignOutAlt} from "react-icons/fa";
+import { FaHome,FaBlogger,FaSignOutAlt,FaQuestionCircle} from "react-icons/fa";
 import { MdCasino,MdOutlineRateReview} from "react-icons/md";
 import { IoLogoGameControllerB } from "react-icons/io";
-import { GoSidebarCollapse,GoSidebarExpand } from "react-icons/go";
+import { GoSidebarCollapse,GoSidebarExpand,GoRepoPush } from "react-icons/go";
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
@@ -57,8 +57,12 @@ const Sidebar = () => {
             {!isCollapsed && <Link to="/admin/reviews" className="hover:text-gray-400">Reviews</Link>}
           </li>
           <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2`}>
-            <MdOutlineRateReview size={24} />
+            <GoRepoPush size={24} />
             {!isCollapsed && <Link to="/admin/popup" className="hover:text-gray-400">Popup</Link>}
+          </li>
+          <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2`}>
+            <FaQuestionCircle size={24} />
+            {!isCollapsed && <Link to="/admin/faq" className="hover:text-gray-400">FAQ</Link>}
           </li>
           {/* ✅ Logout Button */}
           <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2 cursor-pointer`} onClick={handleLogout}>

@@ -26,6 +26,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: [true, "Image is required"],
 },
+approved: {
+    type: Boolean,
+    default: false, // Reviews are unapproved by default
+  },
   isCompleted: {
     type: Boolean,
     default: false,

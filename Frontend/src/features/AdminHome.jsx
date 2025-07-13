@@ -8,6 +8,7 @@ import Games from '../pages/Games';
 import Review from '../pages/Reviews';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Popup from '../pages/Popup';
+import FAQ from '@/pages/FAQ';
 
 // import { ChartAreaInteractive } from "../components/chart-area-interactive";
 // import { SectionCards } from "../components/section-cards";
@@ -49,6 +50,7 @@ function AdminHome() {
           <Route path="/games/*" element={<Games />} />
           <Route path="/reviews" element={<Review />} />
           <Route path="/popup/*" element={<Popup/>} />
+          <Route path="/faq/*" element={<FAQ/>} />
         </Routes>
         </div>
       </div>

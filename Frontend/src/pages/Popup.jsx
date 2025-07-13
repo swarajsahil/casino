@@ -31,6 +31,7 @@ const AdminPopup = () => {
   const navigate = useNavigate();
   const { data: popup, loading } = useSelector((state) => state.popup);
 
+
   useEffect(() => {
     dispatch(fetchPopup());
   }, [dispatch]);

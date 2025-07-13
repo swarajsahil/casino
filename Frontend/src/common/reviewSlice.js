@@ -11,7 +11,7 @@ export const fetchReviews = createAsyncThunk("reviews/fetchReviews", async () =>
 });
 
 // Fetch all reviews (for admin panel)
-export const fetchAllReviews = createAsyncThunk("reviews/fetchAllReviews", async () => {
+export const fetchAllReviews = createAsyncThunk("reviews/fetchAllReviews", async () => { 
   const response = await axios.get(`${REVIEW_API_URL}/all`);
   return response.data;
 });

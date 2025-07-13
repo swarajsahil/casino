@@ -1,9 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {BLOG_API_URL} from "../app/constants";
+import axios from "axios";
 const API_URL = import.meta.env.VITE_API_URL;
 // Fetch All Blogs
 export const fetchBlogs = createAsyncThunk("blogs/fetchBlogs", async () => {
   const response = await fetch(BLOG_API_URL);
+  const data = await response.json();
+  return data.blogs || [];
+});
+// Fetch all blogs (for admin panel)
+export const fetchAllBlogs= createAsyncThunk("blogs/fetchAllBlogs", async () => { 
+  const response = await fetch(`${BLOG_API_URL}/all`);
   const data = await response.json();
   return data.blogs || [];
 });
@@ -23,6 +30,11 @@ export const addBlog = createAsyncThunk("blogs/addBlog", async (blogData) => {
   });
   return await response.json();
 });
+// Approve a Blog
+export const approveBlog = createAsyncThunk("blogs/approveReview", async (id) => {
+    const response = await axios.patch(`${API_URL}/api/blogs/approve/${id}`);
+    return response.data;
+  });
 // Update Blog
 export const updateBlog = createAsyncThunk("blogs/updateBlog", async ({ id, updatedData }) => {
   const response = await fetch(`${BLOG_API_URL}/${id}`, {
@@ -43,7 +55,8 @@ export const deleteBlog = createAsyncThunk("blogs/deleteBlog", async (id) => {
 const blogSlice = createSlice({
   name: "blogs",
   initialState: {
-    data: [],
+    blogs: [],          // For approved blogs (public view)
+    allBlogs: [],        // For all blogs (admin view)
     loading: false,
     error: null,
   },
@@ -55,34 +68,43 @@ const blogSlice = createSlice({
       })
       .addCase(fetchBlogs.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.blogs = action.payload;  // Store approved blogs here
       })
       .addCase(fetchBlogs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(fetchBlogsById.pending, (state) => {
+      .addCase(fetchAllBlogs.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchBlogsById.fulfilled, (state, action) => {
+      .addCase(fetchAllBlogs.fulfilled, (state, action) => {
         state.loading = false;
-        state.selectedBlog = action.payload;
+        state.allBlogs = action.payload;  // Store all blogs here
       })
-      .addCase(fetchBlogsById.rejected, (state, action) => {
+      .addCase(fetchAllBlogs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      builder.addCase(addBlog.fulfilled, (state, action) => {
-        state.data = [action.payload, ...state.data]; // Add new blog at the beginning
+      .addCase(addBlog.fulfilled, (state, action) => {
+        state.allBlogs.unshift(action.payload); // Add to allBlogs
+      })
+      .addCase(approveBlog.fulfilled, (state, action) => {
+        state.allBlogs = state.allBlogs.map((blog) =>
+          blog._id === action.payload.blog._id ? { ...blog, approved: true } : blog
+        );
       })
       .addCase(updateBlog.fulfilled, (state, action) => {
-        const index = state.data.findIndex((blog) => blog._id === action.payload._id);
-        if (index !== -1) {
-          state.data[index] = action.payload;
-        }
+        // Update in both arrays if needed
+        state.allBlogs = state.allBlogs.map(blog => 
+          blog._id === action.payload._id ? action.payload : blog
+        );
+        state.blogs = state.blogs.map(blog => 
+          blog._id === action.payload._id ? action.payload : blog
+        );
       })
       .addCase(deleteBlog.fulfilled, (state, action) => {
-        state.data = state.data.filter((blog) => blog._id !== action.payload);
+        state.allBlogs = state.allBlogs.filter(blog => blog._id !== action.payload);
+        state.blogs = state.blogs.filter(blog => blog._id !== action.payload);
       });
   },
 });
