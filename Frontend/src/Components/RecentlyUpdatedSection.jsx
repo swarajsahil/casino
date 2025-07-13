@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, forwardRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 const RecentlyUpdatedSection = () => {
   const items = [
@@ -71,6 +71,60 @@ const RecentlyUpdatedSection = () => {
   const [visibleCards, setVisibleCards] = useState(1);
   const containerRef = useRef(null);
   const cardRefs = useRef([]);
+
+  const Card = ({ item, isActive, isMobileView, innerRef }) => {
+    return (
+      <div
+        ref={innerRef}
+        className={`flex flex-col rounded-lg p-6 relative transition-all duration-300 ease-in-out h-full border border-gray-100
+          ${isMobileView ? "snap-start" : ""}
+          ${isActive || !isMobileView ? "bg-white shadow-lg" : "bg-gray-50"}
+          ${!isMobileView ? "hover:bg-white hover:shadow-lg" : ""}`}
+      >
+        {/* Type Badge */}
+        <div
+          className={`absolute px-3 py-1.5 rounded-md text-xs font-medium top-[-15px] flex items-center gap-1 ${
+            isActive ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-800"
+          }`}
+        >
+          <span className="w-3 h-3">{item.icon}</span>
+          {item.type}
+        </div>
+
+        {/* Image */}
+        <div className="bg-gray-100 h-32 flex items-center justify-center rounded-md mb-4 overflow-hidden">
+          <img
+            src={item.image}
+            alt={item.alt}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        {/* Date */}
+        <span className="text-xs text-gray-500 mb-2">{item.date}</span>
+        
+        {/* Title */}
+        <h3 className="text-lg font-semibold text-gray-800 mb-3">{item.title}</h3>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+          {item.description}
+        </p>
+
+        {/* Link */}
+        <a 
+          href={item.href} 
+          className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center"
+        >
+          Show more
+          <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    );
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -183,7 +237,7 @@ const RecentlyUpdatedSection = () => {
                 item={item}
                 isActive={index === activeIndex}
                 isMobileView={isMobileView}
-                ref={(el) => (cardRefs.current[index] = el)}
+                innerRef={(el) => (cardRefs.current[index] = el)}
               />
             </div>
           ))}
@@ -232,61 +286,5 @@ const RecentlyUpdatedSection = () => {
     </div>
   );
 };
-
-const Card = forwardRef(({ item, isActive, isMobileView }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={`flex flex-col rounded-lg p-6 relative transition-all duration-300 ease-in-out h-full border border-gray-100
-        ${isMobileView ? "snap-start" : ""}
-        ${isActive || !isMobileView ? "bg-white shadow-lg" : "bg-gray-50"}
-        ${!isMobileView ? "hover:bg-white hover:shadow-lg" : ""}`}
-    >
-      {/* Type Badge */}
-      <div
-        className={`absolute px-3 py-1.5 rounded-md text-xs font-medium top-[-15px] flex items-center gap-1 ${
-          isActive ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-800"
-        }`}
-      >
-        <span className="w-3 h-3">{item.icon}</span>
-        {item.type}
-      </div>
-
-      {/* Image */}
-      <div className="bg-gray-100 h-32 flex items-center justify-center rounded-md mb-4 overflow-hidden">
-        <img
-          src={item.image}
-          alt={item.alt}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-
-      {/* Date */}
-      <span className="text-xs text-gray-500 mb-2">{item.date}</span>
-      
-      {/* Title */}
-      <h3 className="text-lg font-semibold text-gray-800 mb-3">{item.title}</h3>
-
-      {/* Description */}
-      <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-        {item.description}
-      </p>
-
-      {/* Link */}
-      <a 
-        href={item.href} 
-        className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center"
-      >
-        Show more
-        <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </a>
-    </div>
-  );
-});
-
-Card.displayName = "Card";
 
 export default RecentlyUpdatedSection;
