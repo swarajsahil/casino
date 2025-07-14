@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const SimpleCardSection = () => {
   const items = [
@@ -80,11 +81,18 @@ const SimpleCardSection = () => {
     }
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const Card = ({ item }) => {
-    return (
-      <div className="flex flex-col rounded-lg p-6 relative transition-all duration-300 h-full border border-gray-100 bg-white shadow-lg hover:shadow-lg">
+  return (
+    <div className="w-full mx-auto px-4 py-6">
+      <h2 className="text-center text-xl font-bold text-gray-800 mb-8">Featured Offers</h2>
+      
+      <div className="flex gap-4 overflow-x-auto py-4 px-4">
+        {items.map((item, index) => (
+          <div 
+            key={item.id}
+            className="flex-shrink-0"
+            style={{ width: '300px' }}
+          >
+             <div className="flex flex-col rounded-lg p-6 relative transition-all duration-300 h-full border border-gray-100 bg-white shadow-lg hover:shadow-lg">
         {/* Type Badge */}
         <div className="absolute px-3 py-1.5 rounded-md text-xs font-medium top-[-15px] flex items-center gap-1 bg-purple-600 text-white">
           <span className="w-3 h-3">{item.icon}</span>
@@ -113,47 +121,19 @@ const SimpleCardSection = () => {
         </p>
 
         {/* Link - This will cause deployment error for /liveCasino */}
-        <a 
-          href={item.href} 
+        <Link 
+          to={`/liveCasino`} 
           className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center"
         >
           Show more
           <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </a>
+        </Link>
       </div>
-    );
-  };
-
-  return (
-    <div className="w-full mx-auto px-4 py-6">
-      <h2 className="text-center text-xl font-bold text-gray-800 mb-8">Featured Offers</h2>
-      
-      <div className="flex gap-4 overflow-x-auto py-4 px-4">
-        {items.map((item, index) => (
-          <div 
-            key={item.id}
-            className="flex-shrink-0"
-            style={{ width: '300px' }}
-          >
-            <Card item={item} />
           </div>
         ))}
       </div>
-      
-      {/* <div className="flex justify-center mt-6 gap-2">
-        {items.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveIndex(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-colors ${
-              index === activeIndex ? "bg-blue-600" : "bg-gray-300"
-            }`}
-            aria-label={`Go to item ${index + 1}`}
-          />
-        ))}
-      </div> */}
     </div>
   );
 };
