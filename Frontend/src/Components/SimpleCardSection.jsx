@@ -1,0 +1,161 @@
+import React, { useState } from "react";
+
+const SimpleCardSection = () => {
+  const items = [
+    {
+      id: 1,
+      href: "/liveCasino", // This will cause deployment error
+      type: "Live Casino",
+      icon: (
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 5H3C1.9 5 1 5.9 1 7V17C1 18.1 1.9 19 3 19H21C22.1 19 23 18.1 23 17V7C23 5.9 22.1 5 21 5ZM21 17H3V7H21V17Z" fill="currentColor"/>
+          <path d="M15 15H17V9H15V15ZM7 15H13V13H9V11H13V9H7V15Z" fill="currentColor"/>
+        </svg>
+      ),
+      image: "/assets/live-casino-image",
+      alt: "Live Casino",
+      date: "2025 / 06 / 24",
+      title: "Live Casino",
+      description: "Experience the thrill of live dealer games with our premium casino offerings."
+    },
+    {
+      id: 2,
+      href: "/bonuses",
+      type: "Bonuses",
+      icon: (
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.91658 8.89286V12.9015C7.9166 12.9531 7.90291 13.0038 7.87694 13.0484C7.85096 13.093 7.81362 13.1299 7.76872 13.1553C7.72383 13.1808 7.67298 13.1939 7.62138 13.1932C7.56978 13.1926 7.51927 13.1783 7.475 13.1518L4.99992 11.6666L2.52484 13.1518C2.48053 13.1783 2.42996 13.1926 2.37831 13.1932C2.32666 13.1938 2.27577 13.1807 2.23086 13.1552C2.18595 13.1297 2.14861 13.0927 2.12268 13.048C2.09674 13.0034 2.08314 12.9526 2.08325 12.9009V8.89344C1.3285 8.28916 0.780081 7.46537 0.51377 6.53592C0.247459 5.60647 0.27641 4.61725 0.596622 3.70497C0.916834 2.79269 1.5125 2.00238 2.30129 1.44327C3.09009 0.884166 4.03307 0.583862 4.99992 0.583862C5.96677 0.583862 6.90975 0.884166 7.69854 1.44327C8.48734 2.00238 9.083 2.79269 9.40322 3.70497C9.72343 4.61725 9.75238 5.60647 9.48607 6.53592C9.21976 7.46537 8.67133 8.28916 7.91658 8.89344V8.89286ZM3.24992 9.57711V11.3563L4.99992 10.3063L6.74992 11.3563V9.57711C6.19391 9.80198 5.59968 9.91727 4.99992 9.91661C4.40016 9.91727 3.80593 9.80198 3.24992 9.57711ZM4.99992 8.74994C5.92818 8.74994 6.81842 8.3812 7.47479 7.72482C8.13117 7.06844 8.49992 6.1782 8.49992 5.24994C8.49992 4.32169 8.13117 3.43145 7.47479 2.77507C6.81842 2.11869 5.92818 1.74994 4.99992 1.74994C4.07166 1.74994 3.18142 2.11869 2.52505 2.77507C1.86867 3.43145 1.49992 4.32169 1.49992 5.24994C1.49992 6.1782 1.86867 7.06844 2.52505 7.72482C3.18142 8.3812 4.07166 8.74994 4.99992 8.74994Z" fill="currentColor"/>
+        </svg>
+      ),
+      image: "/assets/bonus-image",
+      alt: "Bonus Codes",
+      date: "2025 / 06 / 25",
+      title: "Bonus Codes",
+      description: "Get exclusive bonus codes for your favorite casino games."
+    },
+     {
+      id: 3,
+      href: "/bonuses",
+      type: "Games",
+      icon: (
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.91658 8.89286V12.9015C7.9166 12.9531 7.90291 13.0038 7.87694 13.0484C7.85096 13.093 7.81362 13.1299 7.76872 13.1553C7.72383 13.1808 7.67298 13.1939 7.62138 13.1932C7.56978 13.1926 7.51927 13.1783 7.475 13.1518L4.99992 11.6666L2.52484 13.1518C2.48053 13.1783 2.42996 13.1926 2.37831 13.1932C2.32666 13.1938 2.27577 13.1807 2.23086 13.1552C2.18595 13.1297 2.14861 13.0927 2.12268 13.048C2.09674 13.0034 2.08314 12.9526 2.08325 12.9009V8.89344C1.3285 8.28916 0.780081 7.46537 0.51377 6.53592C0.247459 5.60647 0.27641 4.61725 0.596622 3.70497C0.916834 2.79269 1.5125 2.00238 2.30129 1.44327C3.09009 0.884166 4.03307 0.583862 4.99992 0.583862C5.96677 0.583862 6.90975 0.884166 7.69854 1.44327C8.48734 2.00238 9.083 2.79269 9.40322 3.70497C9.72343 4.61725 9.75238 5.60647 9.48607 6.53592C9.21976 7.46537 8.67133 8.28916 7.91658 8.89344V8.89286ZM3.24992 9.57711V11.3563L4.99992 10.3063L6.74992 11.3563V9.57711C6.19391 9.80198 5.59968 9.91727 4.99992 9.91661C4.40016 9.91727 3.80593 9.80198 3.24992 9.57711ZM4.99992 8.74994C5.92818 8.74994 6.81842 8.3812 7.47479 7.72482C8.13117 7.06844 8.49992 6.1782 8.49992 5.24994C8.49992 4.32169 8.13117 3.43145 7.47479 2.77507C6.81842 2.11869 5.92818 1.74994 4.99992 1.74994C4.07166 1.74994 3.18142 2.11869 2.52505 2.77507C1.86867 3.43145 1.49992 4.32169 1.49992 5.24994C1.49992 6.1782 1.86867 7.06844 2.52505 7.72482C3.18142 8.3812 4.07166 8.74994 4.99992 8.74994Z" fill="currentColor"/>
+        </svg>
+      ),
+      image: "/assets/bonus-image",
+      alt: "Bonus Codes",
+      date: "2025 / 06 / 25",
+      title: "Games Codes",
+      description: "Get exclusive bonus codes for your favorite casino games."
+    },
+     {
+      id: 4,
+      href: "/bonuses",
+      type: "News",
+      icon: (
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.91658 8.89286V12.9015C7.9166 12.9531 7.90291 13.0038 7.87694 13.0484C7.85096 13.093 7.81362 13.1299 7.76872 13.1553C7.72383 13.1808 7.67298 13.1939 7.62138 13.1932C7.56978 13.1926 7.51927 13.1783 7.475 13.1518L4.99992 11.6666L2.52484 13.1518C2.48053 13.1783 2.42996 13.1926 2.37831 13.1932C2.32666 13.1938 2.27577 13.1807 2.23086 13.1552C2.18595 13.1297 2.14861 13.0927 2.12268 13.048C2.09674 13.0034 2.08314 12.9526 2.08325 12.9009V8.89344C1.3285 8.28916 0.780081 7.46537 0.51377 6.53592C0.247459 5.60647 0.27641 4.61725 0.596622 3.70497C0.916834 2.79269 1.5125 2.00238 2.30129 1.44327C3.09009 0.884166 4.03307 0.583862 4.99992 0.583862C5.96677 0.583862 6.90975 0.884166 7.69854 1.44327C8.48734 2.00238 9.083 2.79269 9.40322 3.70497C9.72343 4.61725 9.75238 5.60647 9.48607 6.53592C9.21976 7.46537 8.67133 8.28916 7.91658 8.89344V8.89286ZM3.24992 9.57711V11.3563L4.99992 10.3063L6.74992 11.3563V9.57711C6.19391 9.80198 5.59968 9.91727 4.99992 9.91661C4.40016 9.91727 3.80593 9.80198 3.24992 9.57711ZM4.99992 8.74994C5.92818 8.74994 6.81842 8.3812 7.47479 7.72482C8.13117 7.06844 8.49992 6.1782 8.49992 5.24994C8.49992 4.32169 8.13117 3.43145 7.47479 2.77507C6.81842 2.11869 5.92818 1.74994 4.99992 1.74994C4.07166 1.74994 3.18142 2.11869 2.52505 2.77507C1.86867 3.43145 1.49992 4.32169 1.49992 5.24994C1.49992 6.1782 1.86867 7.06844 2.52505 7.72482C3.18142 8.3812 4.07166 8.74994 4.99992 8.74994Z" fill="currentColor"/>
+        </svg>
+      ),
+      image: "/assets/bonus-image",
+      alt: "Bonus Codes",
+      date: "2025 / 06 / 25",
+      title: "News Codes",
+      description: "Get exclusive bonus codes for your favorite casino games."
+    },
+     {
+      id: 5,
+      href: "/bonuses",
+      type: "Blog",
+      icon: (
+        <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.91658 8.89286V12.9015C7.9166 12.9531 7.90291 13.0038 7.87694 13.0484C7.85096 13.093 7.81362 13.1299 7.76872 13.1553C7.72383 13.1808 7.67298 13.1939 7.62138 13.1932C7.56978 13.1926 7.51927 13.1783 7.475 13.1518L4.99992 11.6666L2.52484 13.1518C2.48053 13.1783 2.42996 13.1926 2.37831 13.1932C2.32666 13.1938 2.27577 13.1807 2.23086 13.1552C2.18595 13.1297 2.14861 13.0927 2.12268 13.048C2.09674 13.0034 2.08314 12.9526 2.08325 12.9009V8.89344C1.3285 8.28916 0.780081 7.46537 0.51377 6.53592C0.247459 5.60647 0.27641 4.61725 0.596622 3.70497C0.916834 2.79269 1.5125 2.00238 2.30129 1.44327C3.09009 0.884166 4.03307 0.583862 4.99992 0.583862C5.96677 0.583862 6.90975 0.884166 7.69854 1.44327C8.48734 2.00238 9.083 2.79269 9.40322 3.70497C9.72343 4.61725 9.75238 5.60647 9.48607 6.53592C9.21976 7.46537 8.67133 8.28916 7.91658 8.89344V8.89286ZM3.24992 9.57711V11.3563L4.99992 10.3063L6.74992 11.3563V9.57711C6.19391 9.80198 5.59968 9.91727 4.99992 9.91661C4.40016 9.91727 3.80593 9.80198 3.24992 9.57711ZM4.99992 8.74994C5.92818 8.74994 6.81842 8.3812 7.47479 7.72482C8.13117 7.06844 8.49992 6.1782 8.49992 5.24994C8.49992 4.32169 8.13117 3.43145 7.47479 2.77507C6.81842 2.11869 5.92818 1.74994 4.99992 1.74994C4.07166 1.74994 3.18142 2.11869 2.52505 2.77507C1.86867 3.43145 1.49992 4.32169 1.49992 5.24994C1.49992 6.1782 1.86867 7.06844 2.52505 7.72482C3.18142 8.3812 4.07166 8.74994 4.99992 8.74994Z" fill="currentColor"/>
+        </svg>
+      ),
+      image: "/assets/bonus-image",
+      alt: "Bonus Codes",
+      date: "2025 / 06 / 25",
+      title: "Blog Codes",
+      description: "Get exclusive bonus codes for your favorite casino games."
+    }
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const Card = ({ item }) => {
+    return (
+      <div className="flex flex-col rounded-lg p-6 relative transition-all duration-300 h-full border border-gray-100 bg-white shadow-lg hover:shadow-lg">
+        {/* Type Badge */}
+        <div className="absolute px-3 py-1.5 rounded-md text-xs font-medium top-[-15px] flex items-center gap-1 bg-purple-600 text-white">
+          <span className="w-3 h-3">{item.icon}</span>
+          {item.type}
+        </div>
+
+        {/* Image */}
+        <div className="bg-gray-100 h-32 flex items-center justify-center rounded-md mb-4 overflow-hidden">
+          <img
+            src={item.image}
+            alt={item.type}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        {/* Date */}
+        <span className="text-xs text-gray-500 mb-2">{item.date}</span>
+        
+        {/* Title */}
+        <h3 className="text-lg font-semibold text-gray-800 mb-3">{item.title}</h3>
+
+        {/* Description */}
+        <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+          {item.description}
+        </p>
+
+        {/* Link - This will cause deployment error for /liveCasino */}
+        <a 
+          href={item.href} 
+          className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center"
+        >
+          Show more
+          <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    );
+  };
+
+  return (
+    <div className="w-full mx-auto px-4 py-6">
+      <h2 className="text-center text-xl font-bold text-gray-800 mb-8">Featured Offers</h2>
+      
+      <div className="flex gap-4 overflow-x-auto py-4 px-4">
+        {items.map((item, index) => (
+          <div 
+            key={item.id}
+            className="flex-shrink-0"
+            style={{ width: '300px' }}
+          >
+            <Card item={item} />
+          </div>
+        ))}
+      </div>
+      
+      {/* <div className="flex justify-center mt-6 gap-2">
+        {items.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            className={`w-2.5 h-2.5 rounded-full transition-colors ${
+              index === activeIndex ? "bg-blue-600" : "bg-gray-300"
+            }`}
+            aria-label={`Go to item ${index + 1}`}
+          />
+        ))}
+      </div> */}
+    </div>
+  );
+};
+
+export default SimpleCardSection;

@@ -29,7 +29,7 @@ import useFetch from './hooks/useFetch';
 import {carouselData} from "./app/constants"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBlogs } from './common/blogSlice';
-import RecentlyUpdatedSection from './components/RecentlyUpdatedSection';
+import SimpleCardSection from './components/SimpleCardSection';
 import { fetchFAQs } from './common/faqSlice';
 import BlogCard from './components/BlogCard';
 
@@ -68,7 +68,7 @@ function App() {
                   <div className='flex justify-center items-center py-2'><Link className='border border-black rounded-3xl p-2' to={`/liveCasino`}>SHOW MORE</Link></div>
                   <CustomCarousel data={carouselData}/>
                   <BlogCard data={blogs?.slice(0,3)} loading={blogLoading}/>
-                  <RecentlyUpdatedSection/>
+                  <SimpleCardSection/>
                   <Faq data={faq} />
                 </>
               }
