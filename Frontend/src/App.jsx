@@ -30,7 +30,7 @@ import {carouselData} from "./app/constants"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBlogs } from './common/blogSlice';
 import { fetchFAQs } from './common/faqSlice';
-import RecentlyUpdatedSection from './components/RecentlyUpdatedSection';
+import RecentlyUpdatedSection from './Components/RecentlyUpdatedSection';
 import BlogCard from './Components/BlogCard';
 
 function App() {
