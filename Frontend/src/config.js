@@ -174,3 +174,4 @@ export const faqs = [
     answer: "The bonus offers you can claim at top online casinos in India have terms and conditions you should consider before claiming them. Some of them include the bonus wagering condition, the minimum deposit limit, the bonus validity period, and eligible games."
   },
 ];
+

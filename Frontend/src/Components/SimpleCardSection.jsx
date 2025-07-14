@@ -86,7 +86,7 @@ const SimpleCardSection = () => {
       <h2 className="text-center text-xl font-bold text-gray-800 mb-8">Featured Offers</h2>
       
       <div className="flex gap-4 overflow-x-auto py-4 px-4">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <div 
             key={item.id}
             className="flex-shrink-0"
@@ -120,7 +120,6 @@ const SimpleCardSection = () => {
           {item.description}
         </p>
 
-        {/* Link - This will cause deployment error for /liveCasino */}
         <Link 
           to={`/liveCasino`} 
           className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline flex items-center"

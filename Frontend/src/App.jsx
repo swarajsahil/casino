@@ -29,10 +29,9 @@ import useFetch from './hooks/useFetch';
 import {carouselData} from "./app/constants"
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBlogs } from './common/blogSlice';
-import SimpleCardSection from './components/SimpleCardSection';
 import { fetchFAQs } from './common/faqSlice';
 import BlogCard from './components/BlogCard';
-
+import SimpleCardSection from './components/SimpleCardSection';
 
 function App() {
   const isAdminRoute = window.location.pathname.startsWith('/admin');
