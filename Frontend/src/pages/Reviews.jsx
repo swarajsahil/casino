@@ -55,12 +55,39 @@ const Review = () => {
                   ))}
                 </td>
                 <td>
-                  <Form.Check
+                  {/* <Form.Check
                     type="checkbox"
                     checked={review.approved}
                     onChange={() => handleApprove(review._id)}
                     disabled={review.approved} // Disable if already approved
-                  />
+                  /> */}
+                <div className="flex flex-col items-center justify-center space-x-2  rounded-lg p-2">
+                  <div className={`flex items-center justify-center px-3 py-1 rounded-full text-xs font-medium ${review.approved
+                      ? "bg-green-100 text-green-800"
+                      : "bg-yellow-100 text-yellow-800"
+                    }`}>
+                    {review.approved ? "Approved" : "Pending"}
+                  </div>
+
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={review.approved}
+                      onChange={() => handleApprove(review._id)}
+                      className="sr-only peer"
+                      disabled={review.approved}
+                    />
+                    <div className={`w-11 h-6 rounded-full peer ${review.approved
+                        ? "bg-green-500 peer-disabled:bg-green-300"
+                        : "bg-gray-200"
+                      } peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 peer-disabled:opacity-70 peer-disabled:cursor-not-allowed`}>
+                      <div className={`absolute top-0.5 left-[2px] bg-white rounded-full h-5 w-5 transition-all ${review.approved ? "translate-x-5" : ""
+                        }`}></div>
+                    </div>
+                  </label>
+                </div>
+
+                 
                 </td>
                 <td>
                   <button className="flex justify-center text-red-800 w-12" onClick={() => handleDelete(review._id)}>
@@ -79,3 +106,7 @@ const Review = () => {
 };
 
 export default Review;
+
+ {/* Approve Review */}
+                 
+                  

@@ -6,6 +6,8 @@ export const GAMES_API_URL=`${API_URL}/api/games`;
 export const REVIEW_API_URL=`${API_URL}/api/reviews`;
 export const POPUP_API_URL=`${API_URL}/api/popup`;
 export const FAQ_API_URL=`${API_URL}/api/faq`;
+export const PROMOTION_API_URL=`${API_URL}/api/promotions`;
+export const SUBSCRIBER_API_URL=`${API_URL}/api/subscriber`;
 
 export const formatTimestamp = (timestamp) => {
     const now = new Date();
@@ -43,3 +45,27 @@ export const carouselData = [
   },
   // Add more casinos...
 ];
+
+  const promotions = [
+    {
+      id: 1,
+      title: "MEGA JACKPOT BONUS",
+      bonus: "200% UP TO $1000",
+      description: "Claim your massive welcome package with our exclusive Mega Jackpot Bonus. Perfect for high rollers looking to maximize their playtime!",
+      image: "https://a.omappapi.com/users/4e11541cdfb6/images/ea4cf2e1025b1735596138-Stake-Casino.png"
+    },
+    {
+      id: 2,
+      title: "FREE SPINS FRENZY",
+      bonus: "100 FREE SPINS",
+      description: "Spin your way to big wins with our Free Spins Frenzy offer. No deposit required - just sign up and start spinning!",
+      image: "https://a.omappapi.com/users/4e11541cdfb6/images/62802eb4915d1703236121-begambleaware-1.png"
+    },
+    {
+      id: 3,
+      title: "CASHBACK SPECIAL",
+      bonus: "20% WEEKLY CASHBACK",
+      description: "Get money back on your losses every week with our Cashback Special. The more you play, the more you get back!",
+      image: "https://a.omappapi.com/users/4e11541cdfb6/images/07d62a25dfa41703236378-Icon-star.png"
+    }
+  ];

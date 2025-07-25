@@ -9,6 +9,8 @@ import ReviewRouter from "./routes/review.js";
 import AdminRouter from "./routes/user.js";
 import PopupRouter from "./routes/popup.js";
 import FaqRouter from "./routes/faq.js";
+import SubscriptionRouter from "./routes/subscription.js" ;
+import promotionRouter from "./routes/promotion.js";
 import  {errorMiddleware } from "./middlewares/error.js";
 
 const app = express();
@@ -36,6 +38,8 @@ app.use("/api",GameRouter);
 app.use("/api", ReviewRouter);
 app.use("/api", PopupRouter);
 app.use("/api", FaqRouter);
+app.use('/api', SubscriptionRouter);
+app.use('/api/promotions', promotionRouter);
 app.use("/admin", AdminRouter);
 app.use("/public/uploads", express.static("public/uploads"));
 

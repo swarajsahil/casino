@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome,FaBlogger,FaSignOutAlt,FaQuestionCircle} from "react-icons/fa";
-import { MdCasino,MdOutlineRateReview} from "react-icons/md";
+import { MdCasino,MdOutlineRateReview,MdOutlineUnsubscribe} from "react-icons/md";
 import { IoLogoGameControllerB } from "react-icons/io";
 import { GoSidebarCollapse,GoSidebarExpand,GoRepoPush } from "react-icons/go";
+import { LuIdCard } from "react-icons/lu";
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
@@ -59,6 +60,14 @@ const Sidebar = () => {
           <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2`}>
             <GoRepoPush size={24} />
             {!isCollapsed && <Link to="/admin/popup" className="hover:text-gray-400">Popup</Link>}
+          </li>
+          <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2`}>
+            <LuIdCard size={24} />
+            {!isCollapsed && <Link to="/admin/bottompopup" className="hover:text-gray-400">Bottom Popup</Link>}
+          </li>
+          <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2`}>
+            <MdOutlineUnsubscribe size={24} />
+            {!isCollapsed && <Link to="/admin/subscriber" className="hover:text-gray-400">Subscribers</Link>}
           </li>
           <li className={`flex items-center p-2 ${!isCollapsed ? "hover:bg-gray-700" : ""} gap-2`}>
             <FaQuestionCircle size={24} />

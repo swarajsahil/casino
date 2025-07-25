@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Sidebar from './admin/Sidebar';
+import Sidebar from './Sidebar';
 import Dashboard from '../pages/Dashboard';
 import Blog from '../pages/Blog';
 import Casino from '../pages/Casino';
@@ -8,7 +8,9 @@ import Games from '../pages/Games';
 import Review from '../pages/Reviews';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Popup from '../pages/Popup';
-import FAQ from '@/pages/FAQ';
+import FAQ from '../pages/FAQ';
+import BottomPopup from '../pages/BottomPopup';
+import Subscriber from '../pages/Subscriber';
 
 // import { ChartAreaInteractive } from "../components/chart-area-interactive";
 // import { SectionCards } from "../components/section-cards";
@@ -50,6 +52,8 @@ function AdminHome() {
           <Route path="/games/*" element={<Games />} />
           <Route path="/reviews" element={<Review />} />
           <Route path="/popup/*" element={<Popup/>} />
+          <Route path="/bottompopup/*" element={<BottomPopup/>} />
+          <Route path="/subscriber/*" element={<Subscriber/>} />
           <Route path="/faq/*" element={<FAQ/>} />
         </Routes>
         </div>

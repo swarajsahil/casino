@@ -32,6 +32,8 @@ import { fetchBlogs } from './common/blogSlice';
 import { fetchFAQs } from './common/faqSlice';
 import RecentlyUpdatedSection from './Components/RecentlyUpdatedSection';
 import BlogCard from './Components/BlogCard';
+import BottomPromoPopup from './Components/BottomPromoPopup';
+import CasinoCard from './Components/CasinoCard';
 
 function App() {
   const isAdminRoute = window.location.pathname.startsWith('/admin');
@@ -54,6 +56,7 @@ function App() {
       <ScrollToTop/>
         {!isAdminRoute && <Navbar />}
         {!isAdminRoute && <ScrollPopup />}
+        {!isAdminRoute && <BottomPromoPopup />}
         
         {/* Main content container */}
         <div className={!isAdminRoute ? "pt-16 min-h-screen bg-gray-100" : "min-h-screen"}>
@@ -91,6 +94,8 @@ function App() {
             <Route path="/blogs/:id" element={<BlogPage />}/>
             <Route path="/freeGames" element={<Games data={games?.games} loading={gameLoading}/>}/>
             <Route path="/freeGames/:id" element={<GamesContainer />}/>
+            <Route path="/card" element={<CasinoCard />}/>
+            
             <Route path="/admin/login" element={<Login/>}/>
             <Route 
               path='/admin/*'

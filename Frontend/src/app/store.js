@@ -5,6 +5,8 @@ import casinoReducer from "../common/casinoSlice";
 import reviewReducer from "../common/reviewSlice";
 import popupReducer from "../common/popupSlice";
 import faqReducer from "../common/faqSlice";
+import promotionReducer from "../common/promotionSlice";
+import subscriberReducer from "../common/subscriberSlice";
 const store = configureStore({
   reducer: {
     blogs: blogReducer,
@@ -12,7 +14,9 @@ const store = configureStore({
     casinos: casinoReducer,
     reviews: reviewReducer,
     popup:popupReducer,
-    faq:faqReducer
+    faq:faqReducer,
+    promotion:promotionReducer,
+    subscriber:subscriberReducer
   },
 });
 
