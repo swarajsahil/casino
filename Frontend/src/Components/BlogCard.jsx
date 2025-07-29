@@ -14,7 +14,7 @@ const BlogCard = ({data,loading}) => {
 
   return (
     (loading)?(<SkeletonLoader/>):
-    <div className="bg-gray-100 py-8 px-4 sm:px-4 lg:px-8 min-h-screen">
+    <div className="bg-gray-100 py-8 px-4 sm:px-4 lg:px-8 min-h-auto">
       <div className="max-w-7xl mx-auto">
          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
           <div className="flex items-center">

@@ -36,6 +36,10 @@ const casinoSchema = new mongoose.Schema({
     type: String,
     required: [true, "Dealer name is required"],
 },
+rating: {
+    type: Number,
+    required: true,
+},
 company: {
     type: String,
     required: [true, "Company is required"],

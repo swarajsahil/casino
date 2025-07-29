@@ -58,6 +58,7 @@ const AddCasino = ({ existingCasino, setEditing }) => {
       bonusLink: "",
       dealer: "",
       company: "",
+      rating: 0,
       imageUrl: "",
       imageFile: null
     };
@@ -90,7 +91,7 @@ const AddCasino = ({ existingCasino, setEditing }) => {
     // Append all fields except image sources
     const fields = [
       'name', 'description', 'bonus', 'pros', 'metrics',
-      'casinoLink', 'bonusLink', 'dealer', 'company','freeSpins'
+      'casinoLink', 'bonusLink', 'dealer', 'company','freeSpins','rating'
     ];
     
     fields.forEach(field => {
@@ -234,6 +235,17 @@ const AddCasino = ({ existingCasino, setEditing }) => {
               placeholder="Enter company name"
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Rating</label>
+            <input
+              type="number"
+              name="rating"
+              value={formData.rating}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              placeholder="Enter Rating"
+            />
+          </div>
 
           <div className="md:col-span-2">
           <label className="block text-sm font-medium mb-1">Casino Image</label>
@@ -315,6 +327,7 @@ const AdminCasino = () => {
               <div className="col-span-1 text-center">Spins</div>
               <div className="col-span-1 text-center">Dealer</div>
               <div className="col-span-2 text-center">Company</div>
+              <div className="col-span-2 text-center">Rating</div>
               <div className="col-span-2 text-center">Casino Link</div>
               <div className="col-span-2 text-center">Bonus Link</div>
               <div className="col-span-1 text-center">Actions</div>
@@ -353,6 +366,9 @@ const AdminCasino = () => {
 
                 <div className="col-span-2 text-center text-sm">
                   {casino.company}
+                </div>
+                <div className="col-span-1 text-center text-sm">
+                  {casino.rating}
                 </div>
                 
                 <div className="col-span-2 text-center">

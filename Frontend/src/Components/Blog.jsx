@@ -172,10 +172,10 @@ const Blog = ({ data, loading }) => {
 
   return (
     (loading)?(<SkeletonLoader/>):
-    <div className="bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 min-h-screen">
+    <div className="bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 min-h-auto">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4 ">
           <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -381,7 +381,7 @@ const Blog = ({ data, loading }) => {
         )}
 
         {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
           {data?.map((blog, index) => (
             <Link
               key={blog._id || index}

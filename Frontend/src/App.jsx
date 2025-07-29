@@ -59,7 +59,7 @@ function App() {
         {!isAdminRoute && <BottomPromoPopup />}
         
         {/* Main content container */}
-        <div className={!isAdminRoute ? "pt-16 min-h-screen bg-gray-100" : "min-h-screen"}>
+        <div className={!isAdminRoute ? "pt-16 min-h-auto bg-gray-100" : "min-h-screen"}>
           <Routes>
             <Route
               path="/"

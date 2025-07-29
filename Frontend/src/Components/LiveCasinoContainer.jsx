@@ -38,7 +38,7 @@ const LiveCasinoContainer = () => {
   if (loading) return <div className="text-center py-20">Loading casino details...</div>;
   if (error) return <div className="text-center py-20 text-red-500">Error loading casino: {error.message}</div>;
   
-  const { name, description, image,pros, dealer, company,freeSpins, activePlayers, minBet, maxBet, rtp,casinoLink,bonusLink } = data.casinos;
+  const { name, description, image,pros, dealer,bonus, rating,freeSpins, activePlayers, minBet, maxBet, rtp,casinoLink,bonusLink } = data.casinos;
   const filteredReviews = reviews.filter((review) => review.review.casino.toLowerCase() === name.toLowerCase());
   // console.log(casinoLink);
   
@@ -89,21 +89,6 @@ const LiveCasinoContainer = () => {
     Withdrawal times are competitive, typically processed within 24 hours for verified accounts.`
   }
 
-  const casinos = [
-    {
-      id: 1,
-      name: "Parimatch",
-      logo: "https://img.indiacasinos.com/400x210/casino/parimatch.jpg",
-      rating: 97,
-      bonus: "₹105,000",
-      freeSpins: "100",
-      wagering: "30x",
-      pros: [ "Fast payouts","24/7 support"],
-      features: ["Crypto wallet", "Bitcoin", "VIP programme", "Local language"],
-      link: "https://go.indiacasinos.com/go/parimatch?referrer_path=%2Freviews%2Fparimatch",
-      termsLink: "https://go.indiacasinos.com/go/parimatch_terms?referrer_path=%2Freviews%2Fparimatch"
-    }
-  ];
   
   return (
  <div className="bg-gray-50 min-h-screen pb-20 md:pb-0">
@@ -115,139 +100,127 @@ const LiveCasinoContainer = () => {
             <section className="bg-white rounded-xl shadow-sm p-8">
               <div className="flex flex-col md:flex-row gap-8">
                 <div className="flex-1">
-                   <div className="space-y-6">
-      {casinos.map((casino) => (
-        <div 
-          key={casino.id}
-          className="relative bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:shadow-xl hover:scale-[1.01]"
-        >
-          {/* Background pattern */}
-          <div className="absolute inset-0 opacity-10 bg-[url('https://img.indiacasinos.com/svg/pattern.svg')]"></div>
-          
-          <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 p-4">
-            {/* Casino Logo - Hidden on mobile */}
-            <div className="hidden md:block md:col-span-2">
-              <div className="h-full rounded-lg overflow-hidden shadow-md">
-                <a href={casino.link} rel="nofollow noopener" target="_blank" className="block h-full">
-                  <img 
-                    src={casino.logo} 
-                    alt={`Go to ${casino.name}`} 
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </a>
+                  <div className="space-y-6">
+                    <div
+                      className="relative bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 transition-all duration-300 hover:shadow-xl hover:scale-[1.01]"
+                    >
+                      {/* Background pattern */}
+                      <div className="absolute inset-0 opacity-10 bg-[url('https://img.indiacasinos.com/svg/pattern.svg')]"></div>
+
+                      {/* <div className="relative grid grid-cols-1 md:grid-cols-12 gap-4 p-4"> */}
+                      <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 p-4">
+                        {/* Casino Logo - Hidden on mobile */}
+                        <div className="hidden md:block md:col-span-2">
+                          <div className="h-full rounded-lg overflow-hidden shadow-md">
+                            <span rel="nofollow noopener" target="_blank" className="block h-full">
+                              <img
+                                src={image}
+                                alt={`Go to ${name}`}
+                                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                              />
+                            </span>
+                          </div>
+                        </div>
+
+                         {/* Rating Section - Enhanced for tablet */}
+      <div className="sm:col-span-1 md:col-span-2">
+        <div className="h-full bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-3 flex items-center justify-center">
+          <div className="flex flex-col items-center">
+            <div className="relative w-16 h-16 mb-2">
+              <svg className="w-full h-full" viewBox="0 0 36 36">
+                <path
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#E0E0E0"
+                  strokeWidth="3"
+                />
+                <path
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke="#4CAF50"
+                  strokeWidth="3"
+                  strokeDasharray={`${rating}, 5`}
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-lg">
+                {rating}
               </div>
             </div>
-
-            {/* Rating Section */}
-            <div className="md:col-span-2">
-              <div className="flex h-full bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-2">
-                {/* Mobile Logo */}
-                <div className="md:hidden w-1/3 pr-2">
-                  <a href={casino.link} rel="nofollow noopener" target="_blank" className="block h-full rounded overflow-hidden">
-                    <img 
-                      src={casino.logo} 
-                      alt={`Go to ${casino.name}`} 
-                      className="w-full h-full object-cover"
-                    />
-                  </a>
-                </div>
-
-                {/* Rating Circle */}
-                <div className="flex-1 flex flex-col items-center justify-center">
-                  <div className="relative w-16 h-16 mb-1">
-                    <svg className="w-full h-full" viewBox="0 0 36 36">
-                      <path
-                        d="M18 2.0845
-                          a 15.9155 15.9155 0 0 1 0 31.831
-                          a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="#E0E0E0"
-                        strokeWidth="3"
-                      />
-                      <path
-                        d="M18 2.0845
-                          a 15.9155 15.9155 0 0 1 0 31.831
-                          a 15.9155 15.9155 0 0 1 0 -31.831"
-                        fill="none"
-                        stroke="#4CAF50"
-                        strokeWidth="3"
-                        strokeDasharray={`${casino.rating}, 100`}
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-lg">
-                      {casino.rating}
-                    </div>
-                  </div>
-                  <span className="text-xs text-gray-300 font-medium">Rating</span>
-                </div>
-              </div>
+            <div className="text-center">
+              <span className="text-xs text-gray-300 font-medium block">Rating</span>
             </div>
-
-            {/* Pros */}
-            <div className="md:col-span-2">
-              <div className="h-full bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-1 shadow-md flex flex-col justify-center items-center gap-1">
-                <span className="text-xl font-bold text-white mb-1 text-center">Pros</span>
-                {casino.pros.map((pro,index) => (
-                  <div 
-                    key={index}
-                    className="bg-white bg-opacity-10 rounded-lg p-1 flex flex-col items-center justify-center backdrop-blur-sm hover:bg-opacity-20 transition-colors"
-                  >
-                    <span className="text-xs text-white text-center font-medium">{pro}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Bonus Card */}
-            <div className="md:col-span-2">
-              <div className="h-full bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-3 shadow-md flex flex-col justify-center items-center">
-                <span className="text-lg text-blue-100 mb-1 text-center md:text-sm lg:text-xs">WELCOME BONUS</span>
-                <span className="text-lg font-bold text-white mb-1 md:text-xs">{casino.bonus}</span>
-              </div>
-            </div>
-
-            {/* Free Spins Card */}
-            <div className="md:col-span-2">
-              <div className="h-full bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-3 shadow-md flex flex-col justify-center items-center">
-                <span className="text-xl text-center text-purple-100 md:text-sm">FREE SPINS</span>
-                <span className="text-2xl font-bold text-white mb-1 md:text-lg">{casino.freeSpins}</span>
-              </div>
-            </div>
-
-            {/* Buttons */}
-            <div className="md:col-span-2">
-              <div className="flex flex-col space-y-2 h-full justify-center md:items-start">
-                <a 
-                  href={casino.link} 
-                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white 
-                  font-bold py-3 px-3 rounded-lg text-center transition-all duration-300 transform hover:scale-105 shadow-md"
-                  rel="nofollow noopener" 
-                  target="_blank"
-                >
-                  Play Now
-                </a>
-                <a 
-                  href="#review" 
-                  className="bg-white bg-opacity-20 hover:bg-opacity-30 text-black font-bold py-3 px-3 rounded-lg text-center transition-all duration-300 md:text-sm md:"
-                  rel="noopener"
-                >
-                  Review
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer Disclaimer */}
-          <div className="bg-black bg-opacity-30 py-2 px-4 text-center">
-            <p className="text-xs text-gray-300">
-              18+ | Play Responsibly | <span>Gambleaware.org</span> | 
-              New players only. Minimum deposit of ₹350 required. Wagering requirement of {casino.wagering}. | 
-              <span>Terms apply</span>
-            </p>
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+
+                        {/* Pros */}
+                        <div className="md:col-span-2">
+                          <div className="h-full bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-1 shadow-md flex flex-col justify-center items-center gap-1">
+                            <span className="text-xl font-bold text-white mb-1 text-center">Pros</span>
+                            {pros.map((pro, index) => (
+                              <div
+                                key={index}
+                                className="bg-white bg-opacity-10 rounded-lg p-1 flex flex-col items-center justify-center backdrop-blur-sm hover:bg-opacity-20 transition-colors"
+                              >
+                                <span className="text-xs text-white text-center font-medium">{pro}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Bonus Card */}
+                        <div className="md:col-span-2">
+                          <div className="h-full bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-3 shadow-md flex flex-col justify-center items-center">
+                            <span className="text-xl text-blue-100 mb-1 text-center font-bold md:text-sm ">BONUS</span>
+                            <span className="text-lg font-bold text-white mb-1 md:text-xs">{bonus}</span>
+                          </div>
+                        </div>
+
+                        {/* Free Spins Card */}
+                        <div className="md:col-span-2">
+                          <div className="h-full bg-gradient-to-br from-purple-600 to-purple-800 rounded-xl p-3 shadow-md flex flex-col justify-center items-center">
+                            <span className="text-xl text-center text-purple-100 md:text-sm">FREE SPINS</span>
+                            <span className="text-2xl font-bold text-white mb-1 md:text-lg">{freeSpins}</span>
+                          </div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="md:col-span-2">
+                          <div className="flex flex-col space-y-2 h-full justify-center items-center md:items-start">
+                            <Link
+                              to={casinoLink}
+                              className="w-full md:w-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 
+      text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 transform hover:scale-105 shadow-md text-sm md:text-base"
+                              rel="nofollow noopener"
+                              target="_blank"
+                            >
+                              Play Now
+                            </Link>
+                            <Link
+                              to="/reviews"
+                              className="w-full md:w-auto bg-white bg-opacity-20 hover:bg-opacity-30 text-black font-bold 
+      py-3 px-4 rounded-lg text-center transition-all duration-300 text-sm md:text-base"
+                              rel="noopener"
+                            >
+                              Review
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Footer Disclaimer */}
+                      <div className="bg-black bg-opacity-30 py-2 px-4 text-center">
+                        <p className="text-xs text-gray-300">
+                          18+ | Play Responsibly | <span>Gambleaware.org</span> |
+                          <span>Terms apply</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Author Info */}
                   <div className="mt-6 pt-6 border-t border-gray-200">

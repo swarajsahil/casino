@@ -36,7 +36,7 @@ export const getCasinoById = async (req, res, next) => {
 
 export const addCasino = async (req, res, next) => {
     try {
-        const { name, description, bonus, pros, casinoLink, bonusLink, dealer, company,freeSpins, image: imageUrl } = req.body;
+        const { name, description, bonus, pros, casinoLink, bonusLink, dealer, company,rating,freeSpins, image: imageUrl } = req.body;
 
         let image;
         let imagePublicId = null;
@@ -60,6 +60,7 @@ export const addCasino = async (req, res, next) => {
             bonus,
             pros: pros?.split(",").map(p => p.trim()),
             // metrics: metricsParsed,
+            rating,
             freeSpins,
             casinoLink,
             bonusLink,
@@ -117,6 +118,7 @@ export const updateCasino = async (req, res, next) => {
             dealer: req.body.dealer || casino.dealer,
             company: req.body.company || casino.company,
             freeSpins: req.body.freeSpins || casino.freeSpins,
+            rating: req.body.rating || casino.rating,
             image: newImage,
             imagePublicId: newPublicId
         };
