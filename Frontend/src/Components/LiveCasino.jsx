@@ -192,21 +192,22 @@ const LiveCasino = ({ data, loading }) => {
             </div>
 
             {/* Desktop View (1024px+) */}
-            <div className="hidden lg:flex lg:flex-row lg:w-full lg:h-48">
-              <div className="w-1/3 h-full bg-white flex flex-row justify-around items-center gap-2">
-                <div className="w-1/2 h-28 flex justify-center">
+            <div className="hidden lg:flex lg:flex-row lg:w-auto lg:h-40">
+              <div className="absolute bg-purple-700 w-7 h-6 text-white text-center rounded-br-sm rounded-tl-sm">{index+1}</div>
+              <div className="w-1/3 h-full bg-white flex flex-row justify-around items-center">
+                <div className="w-1/2 flex justify-center">
                   <img
-                    className="w-28 h-28 pl-1 object-cover"
+                    className="w-52 h-32 pl-1 object-cover rounded-lg"
                     src={casino?.image}
                     alt={casino?.name}
                   />
                 </div>
-                <div className="w-2/3 h-28 flex flex-col gap-2 items-start">
-                  <p className="text-xl font-bold">{casino?.name}</p>
+                <div className="w-1/3 h-auto flex flex-col gap-1 items-start">
+                  <p className="text-lg font-bold">{casino?.name}</p>
                   <div>
                     <img
                       src="https://livecasinorank.com/_static/img/checkmark.svg"
-                      className="w-6 h-6 checkmark absolute mt-0 ml-4"
+                      className="w-6 h-6 checkmark absolute ml-4"
                       alt="Checkmark"
                       loading="lazy"
                     />
@@ -216,7 +217,7 @@ const LiveCasino = ({ data, loading }) => {
                       alt="Country Flag"
                     />
                   </div>
-                  <button
+                  {/* <button
                     onClick={() => toggleCardExpand(casino?._id || index)}
                     className="w-32 h-10 bg-gray-100 text-xs text-gray-400 rounded-md flex items-center justify-between p-1 mt-2"
                   >
@@ -230,32 +231,66 @@ const LiveCasino = ({ data, loading }) => {
                     ) : (
                       <CiCirclePlus className="text-lg" />
                     )}
-                  </button>
+                  </button> */}
+                  <div
+                    className="hidden md:flex items-center justify-end gap-2 mt-2"
+                    style={{
+                      background: "rgba(241, 241, 250, 1)",
+                      padding: "7px 12px",
+                      cursor: "pointer",
+                      fontSize: "12px",
+                      fontWeight: "400",
+                      marginTop: "0",
+                      borderRadius: "5px",
+                      display: "flex",
+                      flexGrow: "1",
+                      alignItems: "center",
+                      height: "36px",
+                      boxSizing: "border-box",
+                    }}
+                    onClick={() => toggleCardExpand(casino?._id || index)}
+                  >
+                    {expandedCard === (casino?._id || index) ? (
+                      <>
+                        <span style={{ color: "rgba(18, 15, 63, 0.55)" }}>Show less</span>
+                        <CiCircleMinus className="text-lg" style={{ color: "rgba(18, 15, 63, 0.55)" }} />
+                      </>
+                    ) : (
+                      <>
+                        <span style={{ color: "rgba(18, 15, 63, 0.55)" }}>Show more</span>
+                        <CiCirclePlus className="text-lg" style={{ color: "rgba(18, 15, 63, 0.55)" }} />
+                      </>
+                    )}
+                  </div>
                 </div>
+                <div
+                className="border border-gray-200 h-9/10"
+                ></div>
               </div>
 
-              <div className="flex flex-col w-1/3 justify-center items-center pl-4 text-left">
+              <div className="flex flex-col w-1/3 justify-center items-start pl-2">
                 <p className="text-lg text-amber-900 font-semibold">
                   Bonus: ₹{casino?.bonus}
                 </p>
                 <p className="text-sm text-amber-900">
                   + {casino?.freeSpins} Free Spins
                 </p>
-                <div className="text-xs">
-                  <p>18+ | Play Responsibly | gamblingtherapy.org |</p>
-                  <p> T&Cs Apply</p>
+                <div className="text-xs flex-col">
+                  <p className="text-gray-400 m-0">18+ | Play Responsibly | gamblingtherapy.org |</p>
+                  <p className="text-gray-400 ">T&Cs Apply</p>
                 </div>
-              </div>
+                </div>
 
-              <div className="flex w-1/3 justify-end pr-2 items-center">
-                <div className="flex flex-col gap-4 pb-2">
+              <div className="flex w-1/3 justify-between pr-2 items-center">
+                <div className="border border-gray-200 h-9/10"></div>
+                <div className="w-full flex flex-col gap-2 pb-2 justify-end items-end">
                   <Link to={`${casino?.casinoLink}`} target="1">
-                    <button className="w-44 h-12 bg-green-400 rounded-lg hover:text-white">
+                    <button style={{ borderRadius: '0.3rem' }} className="w-48 h-14 p-2 bg-green-400 hover:bg-green-500 text-white font-medium  transition-colors duration-200">
                       Play Now
                     </button>
                   </Link>
                   <Link to={`/liveCasino/${casino?._id}`}>
-                    <button className="w-44 h-12 bg-gray-300 rounded-lg hover:text-white">
+                    <button style={{ borderRadius: '0.3rem' }} className="w-48 h-14 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium transition-colors duration-200">
                       View Details
                     </button>
                   </Link>
@@ -321,7 +356,7 @@ const LiveCasino = ({ data, loading }) => {
                 </Link>
               </div>
 
-              <div className="text-xxs text-gray-500 p-2 text-center border-t border-gray-200">
+              <div className="text-xs text-gray-500 p-2 text-center border-t border-gray-200">
                 <p>18+ | Play Responsibly | gamblingtherapy.org | T&amp;Cs Apply</p>
               </div>
             </div>
@@ -392,58 +427,150 @@ const LiveCasino = ({ data, loading }) => {
 
             {/* Expanded Content - Desktop */}
             {expandedCard === (casino?._id || index) && (
-              <div className="hidden lg:block bg-gray-50 p-4 border-t border-gray-200">
-                <div className="flex flex-col lg:flex-row gap-6">
-                  <div className="lg:w-1/3">
-                    <h3 className="text-lg font-bold mb-2 text-gray-800">About</h3>
-                    <p className="text-sm text-gray-600">
-                      To ensure the ultimate Live Casino experience, it's crucial to
-                      choose a provider with a proven track record of excellence.{" "}
-                      {casino?.name} is a name you can rely on with a high rating
-                      and a long-standing reputation in the industry.
-                    </p>
-                  </div>
-
-                  <div className="lg:w-1/3">
-                    <div className="flex items-center mb-2">
-                      <svg
-                        className="w-5 h-5 text-green-500 mr-2"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
+              <div className="hidden lg:block px-2 pb-3">
+                <div className="flex flex-row gap-3 items-stretch">
+                  {/* About section */}
+                  <div className="w-[31%] px-0 md:px-2 mb-3 md:mb-0 flex flex-col">
+                    <div
+                      className="p-3 rounded-lg flex-grow"
+                      style={{
+                        background: "rgba(245, 245, 251, 1)",
+                        borderRadius: "10px",
+                        height:"100%"
+                      }}
+                    >
+                      <span
+                        className="block mb-2"
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: "18px"
+                        }}
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <h3 className="text-lg font-bold text-gray-800">Pros</h3>
+                        About
+                      </span>
+                      <div className="showMoreContent">
+                        <p className="text-sm">
+                          Having spent years immersed in the world of online gambling, I've seen countless platforms come and go.
+                          When it comes to the live casino vertical, {casino?.name} is a name that consistently piques my interest.
+                          Let's delve into what makes this platform tick for players in English-speaking countries.
+                        </p>
+                      </div>
                     </div>
-                    <ul className="space-y-2">
-                      {casino?.pros?.map((pro, i) => (
-                        <li key={i} className="flex items-start text-sm">
-                          <span className="inline-block w-2 h-2 bg-green-500 rounded-full mt-1.5 mr-2"></span>
-                          {pro}
-                        </li>
-                      ))}
-                    </ul>
                   </div>
 
-                  <div className="lg:w-1/3">
-                    <h3 className="text-lg font-bold mb-2 text-gray-800">
-                      Casino Stats
-                    </h3>
-                    <div className="grid grid-cols-2 gap-2">
-                      {Object.entries(stats[0]).map(([key, value]) => (
-                        <div
-                          key={key}
-                          className="bg-white p-3 w-auto rounded-lg shadow-sm border border-gray-100"
+                  {/* Pros section */}
+                  <div className="w-[34%] px-0 md:px-2 mb-3 md:mb-0">
+                    <div
+                      className="p-3 rounded-lg"
+                      style={{
+                        background: "rgba(83, 201, 115, 0.1)",
+                        borderRadius: "10px",
+                        width: "100%",
+                        height:"100%"
+                      }}
+                    >
+                      <div className="flex items-center">
+                        <img
+                          src="/_static/icons/pros.svg"
+                          className="mr-2"
+                          alt="Pros"
+                          style={{ width: "20px", height: "20px" }}
+                        />
+                        <span
+                          style={{
+                            fontWeight: "bold",
+                            fontSize: "18px",
+                            color: "#53C973",
+                            display: "block"
+                          }}
                         >
-                          <div className="lg:text-xs md:text-[8px] font-medium text-gray-500 uppercase tracking-wider">
-                            {key}
-                          </div>
-                          <div className="text-lg font-bold text-gray-800 mt-1">
-                            {value}
+                          Pros
+                        </span>
+                      </div>
+                      <ul className="mt-3">
+                        {casino?.pros?.map((pro, i) => (
+                          <li
+                            key={i}
+                            className="my-2 flex items-center text-xs"
+                            style={{
+                              color: "#120f3f",
+                              position: "relative",
+                              paddingLeft: "1em"
+                            }}
+                          >
+                            <span
+                              style={{
+                                background: "#53c973",
+                                width: "6px",
+                                height: "6px",
+                                borderRadius: "5px",
+                                position: "absolute",
+                                top: "5px",
+                                left: "2px"
+                              }}
+                            ></span>
+                            {pro}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Stats section */}
+                  <div className="w-[30%] px-0 md:px-2">
+                    <div
+                      className="p-2 rounded-lg flex flex-wrap"
+                      style={{
+                        background: "rgba(245, 245, 251, 1)",
+                        borderRadius: "10px",
+                        flexGrow: "1",
+                        alignContent: "flex-start"
+                      }}
+                    >
+                      {/* Stats items */}
+                      {[
+                        { label: "Year founded", value: "2021" },
+                        { label: "Licenses", value: "1" },
+                        { label: "Games", value: "25" },
+                        { label: "Payments", value: "49" },
+                        { label: "Bonuses", value: "4" },
+                        { label: "Countries", value: "170" },
+                        { label: "Software", value: "32" },
+                        { label: "Currencies", value: "9" },
+                        { label: "Languages", value: "12" },
+                      ].map((stat, i) => (
+                        <div
+                          key={i}
+                          className="w-1/2 p-1"
+                          style={{ height: "fit-content" }}
+                        >
+                          <div
+                            className="flex flex-row justify-between p-2"
+                            style={{
+                              background: "#fff",
+                              borderRadius: "5px"
+                            }}
+                          >
+                            <span
+                              style={{
+                                color: "rgba(18, 15, 63, 0.7)",
+                                fontSize: "12px",
+                                display: "block"
+                              }}
+                            >
+                              {stat.label}
+                            </span>
+                            <span
+                              style={{
+                                color: "rgba(18, 15, 63, 0.7)",
+                                fontWeight: "bold",
+                                fontSize: "12px",
+                                display: "block",
+                                textAlign: "right"
+                              }}
+                            >
+                              {stat.value}
+                            </span>
                           </div>
                         </div>
                       ))}
