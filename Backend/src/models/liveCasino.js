@@ -2,6 +2,21 @@ import mongoose from "mongoose";
 
 
 const casinoSchema = new mongoose.Schema({
+  stats: {
+    type: {
+      Founded: Number,
+      licenses: Number,
+      games: Number,
+      payments: Number,
+      bonuses: Number,
+      countries: Number,
+      software: Number,
+      currencies: Number,
+      languages: Number
+    },
+    _id: false, // This disables the automatic _id for the stats object
+    required: false // Make it optional
+  },
   name: {
     type: String,
     required: true,

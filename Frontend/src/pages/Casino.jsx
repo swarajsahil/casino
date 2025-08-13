@@ -46,6 +46,15 @@ const AddCasino = ({ existingCasino, setEditing }) => {
         ...existingCasino,
         imageUrl: existingCasino.image || '',
         imageFile: null,
+        founded: existingCasino.stats?.Founded || '',
+        licenses: existingCasino.stats?.licenses || '',
+        games: existingCasino.stats?.games || '',
+        payments: existingCasino.stats?.payments || '',
+        bonuses: existingCasino.stats?.bonuses || '',
+        countries: existingCasino.stats?.countries || '',
+        software: existingCasino.stats?.software || '',
+        currencies: existingCasino.stats?.currencies || '',
+        languages: existingCasino.stats?.languages || ''
       };
     }
     return {
@@ -60,7 +69,16 @@ const AddCasino = ({ existingCasino, setEditing }) => {
       company: "",
       rating: 0,
       imageUrl: "",
-      imageFile: null
+      imageFile: null,
+      founded: "",
+      licenses: "",
+      games: "",
+      payments: "",
+      bonuses: "",
+      countries: "",
+      software: "",
+      currencies: "",
+      languages: ""
     };
   });
 
@@ -91,11 +109,18 @@ const AddCasino = ({ existingCasino, setEditing }) => {
     // Append all fields except image sources
     const fields = [
       'name', 'description', 'bonus', 'pros', 'metrics',
-      'casinoLink', 'bonusLink', 'dealer', 'company','freeSpins','rating'
+      'casinoLink', 'bonusLink', 'dealer', 'company','freeSpins','rating',
+
+    // Add stats fields
+    'founded', 'licenses', 'games', 'payments', 
+    'bonuses', 'countries', 'software', 'currencies', 'languages'
     ];
     
     fields.forEach(field => {
-      if (formData[field]) casinoData.append(field, formData[field]);
+      // if (formData[field]) casinoData.append(field, formData[field]);
+      if (formData[field] !== undefined && formData[field] !== null) {
+      casinoData.append(field, formData[field]);
+    }
     });
 
 
@@ -268,6 +293,115 @@ const AddCasino = ({ existingCasino, setEditing }) => {
             />
           </div>
         </div>
+        <div className="md:col-span-2 grid grid-cols-3 gap-4">
+  <div>
+    <label className="block text-sm font-medium mb-1">Founded</label>
+    <input
+      type="number"
+      name="founded"
+      value={formData.founded || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Year founded"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Licenses</label>
+    <input
+      type="number"
+      name="licenses"
+      value={formData.licenses || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of licenses"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Games</label>
+    <input
+      type="number"
+      name="games"
+      value={formData.games || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of games"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Payments</label>
+    <input
+      type="number"
+      name="payments"
+      value={formData.payments || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of payments"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Bonuses</label>
+    <input
+      type="number"
+      name="bonuses"
+      value={formData.bonuses || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of bonuses"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Countries</label>
+    <input
+      type="number"
+      name="countries"
+      value={formData.countries || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of countries"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Software</label>
+    <input
+      type="number"
+      name="software"
+      value={formData.software || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of software"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Currencies</label>
+    <input
+      type="number"
+      name="currencies"
+      value={formData.currencies || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of currencies"
+    />
+  </div>
+  
+  <div>
+    <label className="block text-sm font-medium mb-1">Languages</label>
+    <input
+      type="number"
+      name="languages"
+      value={formData.languages || ''}
+      onChange={handleChange}
+      className="w-full p-2 border rounded"
+      placeholder="Number of languages"
+    />
+  </div>
+</div>
         </div>
 
         <div className="flex justify-end gap-4 mt-6">
@@ -320,82 +454,80 @@ const AdminCasino = () => {
         <AddCasino existingCasino={editingCasino} setEditing={setEditingCasino} />
       ) : (
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="hidden md:grid grid-cols-14 bg-gray-100 p-3 font-bold text-sm">
-              <div className="col-span-1 text-center">Image</div>
-              <div className="col-span-2 text-center">Name</div>
-              <div className="col-span-1 text-center">Bonus</div>
-              <div className="col-span-1 text-center">Spins</div>
-              <div className="col-span-1 text-center">Dealer</div>
-              <div className="col-span-2 text-center">Company</div>
-              <div className="col-span-2 text-center">Rating</div>
-              <div className="col-span-2 text-center">Casino Link</div>
-              <div className="col-span-2 text-center">Bonus Link</div>
-              <div className="col-span-1 text-center">Actions</div>
-            </div>
-          
+          <div className="hidden md:grid grid-cols-14 bg-gray-100 p-3 font-bold text-sm">
+            <div className="col-span-1 text-center">Image</div>
+            <div className="col-span-2 text-center">Name</div>
+            <div className="col-span-1 text-center">Bonus</div>
+            <div className="col-span-1 text-center">Spins</div>
+            <div className="col-span-1 text-center">Dealer</div>
+            <div className="col-span-2 text-center">Company</div>
+            <div className="col-span-1 text-center">Rating</div>
+            <div className="col-span-2 text-center">Casino Link</div>
+            <div className="col-span-2 text-center">Bonus Link</div>
+            <div className="col-span-1 text-center">Actions</div>
+          </div>
           <div className="divide-y divide-gray-200">
             {casinos && casinos?.map((casino) => (
-              <div 
-                key={casino._id}
-                className="grid grid-cols-1 md:grid-cols-14 gap-2 p-3 hover:bg-gray-50 items-center"
-              >
-                <div className="col-span-1 flex justify-center">
-                  <img 
-                    src={casino.image} 
-                    alt={casino.name} 
-                    className="w-12 h-12 object-cover rounded"
-                  />
-                </div>
-                
-                <div className="col-span-2 text-center font-medium">
-                  {casino.name}
-                </div>
-                
-                <div className="col-span-1 text-center text-sm">
-                  {casino.bonus}
-                </div>
+              <React.Fragment key={casino._id}>
+                <div className="grid grid-cols-1 md:grid-cols-14 gap-2 p-3 hover:bg-gray-50 items-center">
+                  {/* Your existing row content remains exactly the same */}
+                  <div className="col-span-1 flex justify-center">
+                    <img 
+                      src={casino.image} 
+                      alt={casino.name} 
+                      className="w-12 h-12 object-cover rounded"
+                    />
+                  </div>
+                  
+                  <div className="col-span-2 text-center font-medium">
+                    {casino.name}
+                  </div>
+                  
+                  <div className="col-span-1 text-center text-sm">
+                    {casino.bonus}
+                  </div>
 
-                <div className="col-span-1 text-center text-sm">
-                  {casino.freeSpins}
-                </div>
+                  <div className="col-span-1 text-center text-sm">
+                    {casino.freeSpins}
+                  </div>
 
+                  <div className="col-span-1 text-center text-sm">
+                    {casino.dealer}
+                  </div>
 
-                <div className="col-span-1 text-center text-sm">
-                  {casino.dealer}
-                </div>
-
-                <div className="col-span-2 text-center text-sm">
-                  {casino.company}
-                </div>
-                <div className="col-span-1 text-center text-sm">
-                  {casino.rating}
-                </div>
-                
-                <div className="col-span-2 text-center">
-                  <a
-                    href={casino.casinoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline text-sm"
-                  >
-                    Visit Casino
-                  </a>
-                </div>
-                
-                <div className="col-span-2 text-center">
-                  {casino.bonusLink && (
+                  <div className="col-span-2 text-center text-sm">
+                    {casino.company}
+                  </div>
+                  
+                  <div className="col-span-1 text-center text-sm">
+                    {casino.rating}
+                  </div>
+                  
+                  <div className="col-span-2 text-center">
                     <a
-                      href={casino.bonusLink}
+                      href={casino.casinoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md inline-block text-sm"
+                      className="text-blue-500 hover:underline text-sm"
                     >
-                      Claim Bonus
+                      Visit Casino
                     </a>
-                  )}
-                </div>
-                
-                <div className="col-span-1 flex justify-center space-x-2">
+                  </div>
+                  
+                  <div className="col-span-2 text-center">
+                    {casino.bonusLink && (
+                      <a
+                        href={casino.bonusLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md inline-block text-sm"
+                      >
+                        Claim Bonus
+                      </a>
+                    )}
+                  </div>
+                  
+                 <div className="col-span-1 flex justify-center space-x-2">
                   <button
                     onClick={() => setEditingCasino(casino)}
                     className="text-blue-500 hover:text-blue-600"
@@ -431,12 +563,179 @@ const AdminCasino = () => {
                     </svg>
                   </button>
                 </div>
-              </div>
+                </div>
+                
+                {/* Stats row - appears below each casino row */}
+                {casino.stats && (
+                  <div className="col-span-full bg-gray-50 p-3 border-t border-gray-200">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 text-xs">
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Founded</span>
+                        <span>{casino.stats.Founded}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Licenses</span>
+                        <span>{casino.stats.licenses}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Games</span>
+                        <span>{casino.stats.games}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Payments</span>
+                        <span>{casino.stats.payments}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Bonuses</span>
+                        <span>{casino.stats.bonuses}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Countries</span>
+                        <span>{casino.stats.countries}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Software</span>
+                        <span>{casino.stats.software}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Currencies</span>
+                        <span>{casino.stats.currencies}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">Languages</span>
+                        <span>{casino.stats.languages}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         </div>
       )}
     </div>
+    // <div className="p-6">
+    //   {editingCasino ? (
+    //     <AddCasino existingCasino={editingCasino} setEditing={setEditingCasino} />
+    //   ) : (
+    //     <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    //         <div className="hidden md:grid grid-cols-14 bg-gray-100 p-3 font-bold text-sm">
+    //           <div className="col-span-1 text-center">Image</div>
+    //           <div className="col-span-2 text-center">Name</div>
+    //           <div className="col-span-1 text-center">Bonus</div>
+    //           <div className="col-span-1 text-center">Spins</div>
+    //           <div className="col-span-1 text-center">Dealer</div>
+    //           <div className="col-span-2 text-center">Company</div>
+    //           <div className="col-span-1 text-center">Rating</div>
+    //           <div className="col-span-2 text-center">Casino Link</div>
+    //           <div className="col-span-2 text-center">Bonus Link</div>
+    //           <div className="col-span-1 text-center">Actions</div>
+    //         </div>
+          
+    //       <div className="divide-y divide-gray-200">
+    //         {casinos && casinos?.map((casino) => (
+    //           <div 
+    //             key={casino._id}
+    //             className="grid grid-cols-1 md:grid-cols-14 gap-2 p-3 hover:bg-gray-50 items-center"
+    //           >
+    //             <div className="col-span-1 flex justify-center">
+    //               <img 
+    //                 src={casino.image} 
+    //                 alt={casino.name} 
+    //                 className="w-12 h-12 object-cover rounded"
+    //               />
+    //             </div>
+                
+    //             <div className="col-span-2 text-center font-medium">
+    //               {casino.name}
+    //             </div>
+                
+    //             <div className="col-span-1 text-center text-sm">
+    //               {casino.bonus}
+    //             </div>
+
+    //             <div className="col-span-1 text-center text-sm">
+    //               {casino.freeSpins}
+    //             </div>
+
+
+    //             <div className="col-span-1 text-center text-sm">
+    //               {casino.dealer}
+    //             </div>
+
+    //             <div className="col-span-2 text-center text-sm">
+    //               {casino.company}
+    //             </div>
+    //             <div className="col-span-1 text-center text-sm">
+    //               {casino.rating}
+    //             </div>
+                
+    //             <div className="col-span-2 text-center">
+    //               <a
+    //                 href={casino.casinoLink}
+    //                 target="_blank"
+    //                 rel="noopener noreferrer"
+    //                 className="text-blue-500 hover:underline text-sm"
+    //               >
+    //                 Visit Casino
+    //               </a>
+    //             </div>
+                
+    //             <div className="col-span-2 text-center">
+    //               {casino.bonusLink && (
+    //                 <a
+    //                   href={casino.bonusLink}
+    //                   target="_blank"
+    //                   rel="noopener noreferrer"
+    //                   className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md inline-block text-sm"
+    //                 >
+    //                   Claim Bonus
+    //                 </a>
+    //               )}
+    //             </div>
+                
+                // <div className="col-span-1 flex justify-center space-x-2">
+                //   <button
+                //     onClick={() => setEditingCasino(casino)}
+                //     className="text-blue-500 hover:text-blue-600"
+                //     title="Edit"
+                //   >
+                //     <svg
+                //       xmlns="http://www.w3.org/2000/svg"
+                //       className="h-5 w-5"
+                //       viewBox="0 0 24 24"
+                //       fill="none"
+                //       stroke="currentColor"
+                //       strokeWidth="2"
+                //     >
+                //       <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                //       <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                //     </svg>
+                //   </button>
+                  
+                //   <button
+                //     onClick={() => handleDelete(casino._id)}
+                //     className="text-red-500 hover:text-red-600"
+                //     title="Delete"
+                //   >
+                //     <svg
+                //       xmlns="http://www.w3.org/2000/svg"
+                //       className="h-5 w-5"
+                //       viewBox="0 0 24 24"
+                //       fill="none"
+                //       stroke="currentColor"
+                //       strokeWidth="2"
+                //     >
+                //       <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6" />
+                //     </svg>
+                //   </button>
+                // </div>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   )}
+    // </div>
   );
 };
 

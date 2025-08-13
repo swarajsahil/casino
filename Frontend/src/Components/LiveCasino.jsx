@@ -337,15 +337,17 @@ const LiveCasino = ({ data, loading }) => {
                     ))}
                   </ul>
                 </div>
-
+                
+                {casino.stats && (
                 <div className="grid grid-cols-2 gap-2">
-                  {Object.entries(stats[0]).map(([key, value], i) => (
+                  {Object.entries(casino.stats).map(([key, value], i) => (
                     <div key={i} className="bg-gray-100 p-2 rounded">
                       <div className="text-xs text-gray-500">{key}</div>
                       <div className="font-bold text-xs">{value}</div>
                     </div>
                   ))}
                 </div>
+                )}
 
                 <Link
                   to={`${casino?.casinoLink}`}
@@ -391,10 +393,11 @@ const LiveCasino = ({ data, loading }) => {
                   </div>
                 </div>
 
+                {casino.stats && (
                 <div className="mt-6">
                   <h3 className="text-lg font-bold mb-3 text-gray-800">Casino Stats</h3>
                   <div className="grid grid-cols-3 gap-3">
-                    {Object.entries(stats[0]).map(([key, value]) => (
+                    {Object.entries(casino.stats).map(([key, value]) => (
                       <div key={key} className="bg-white p-3 rounded-lg shadow-sm border border-gray-100">
                         <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">
                           {key}
@@ -406,6 +409,7 @@ const LiveCasino = ({ data, loading }) => {
                     ))}
                   </div>
                 </div>
+                )}
 
                 <div className="flex gap-3 mt-6">
                   <Link
@@ -518,6 +522,7 @@ const LiveCasino = ({ data, loading }) => {
 
                   {/* Stats section */}
                   <div className="w-[30%] px-0 md:px-2">
+                    {casino.stats && (
                     <div
                       className="p-2 rounded-lg flex flex-wrap"
                       style={{
@@ -527,18 +532,7 @@ const LiveCasino = ({ data, loading }) => {
                         alignContent: "flex-start"
                       }}
                     >
-                      {/* Stats items */}
-                      {[
-                        { label: "Year founded", value: "2021" },
-                        { label: "Licenses", value: "1" },
-                        { label: "Games", value: "25" },
-                        { label: "Payments", value: "49" },
-                        { label: "Bonuses", value: "4" },
-                        { label: "Countries", value: "170" },
-                        { label: "Software", value: "32" },
-                        { label: "Currencies", value: "9" },
-                        { label: "Languages", value: "12" },
-                      ].map((stat, i) => (
+                      {Object.entries(casino.stats).map(([key, value], i) => (
                         <div
                           key={i}
                           className="w-1/2 p-1"
@@ -558,7 +552,7 @@ const LiveCasino = ({ data, loading }) => {
                                 display: "block"
                               }}
                             >
-                              {stat.label}
+                              {key}
                             </span>
                             <span
                               style={{
@@ -569,12 +563,13 @@ const LiveCasino = ({ data, loading }) => {
                                 textAlign: "right"
                               }}
                             >
-                              {stat.value}
+                              {value}
                             </span>
                           </div>
                         </div>
                       ))}
                     </div>
+                    )}
                   </div>
                 </div>
               </div>

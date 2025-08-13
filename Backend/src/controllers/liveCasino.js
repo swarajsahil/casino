@@ -36,7 +36,18 @@ export const getCasinoById = async (req, res, next) => {
 
 export const addCasino = async (req, res, next) => {
     try {
-        const { name, description, bonus, pros, casinoLink, bonusLink, dealer, company,rating,freeSpins, image: imageUrl } = req.body;
+        const { name, description, bonus, pros, casinoLink, bonusLink, dealer, company,rating,freeSpins, image: imageUrl,
+            // Add these new fields:
+            founded,
+            licenses,
+            games,
+            payments,
+            bonuses,
+            countries,
+            software,
+            currencies,
+            languages
+         } = req.body;
 
         let image;
         let imagePublicId = null;
@@ -54,12 +65,27 @@ export const addCasino = async (req, res, next) => {
             return next(new ErrorHandler("Image URL or file is required", 400));
         }
 
+        // Create stats object if any stat field is provided
+        let stats = null;
+        if (founded || licenses || games || payments || bonuses || countries || software || currencies || languages) {
+            stats = {
+                Founded: founded || 0,
+                licenses: licenses || 0,
+                games: games || 0,
+                payments: payments || 0,
+                bonuses: bonuses || 0,
+                countries: countries || 0,
+                software: software || 0,
+                currencies: currencies || 0,
+                languages: languages || 0
+            };
+        }
+
         const newCasino = await Casino.create({
             name,
             description,
             bonus,
             pros: pros?.split(",").map(p => p.trim()),
-            // metrics: metricsParsed,
             rating,
             freeSpins,
             casinoLink,
@@ -67,7 +93,8 @@ export const addCasino = async (req, res, next) => {
             dealer,
             company,
             image,
-            imagePublicId // Store public ID in database
+            imagePublicId, // Store public ID in database
+            stats
         });
 
         res.status(201).json({
@@ -87,6 +114,33 @@ export const updateCasino = async (req, res, next) => {
         const casino = await Casino.findById(id);
         if (!casino) {
             return next(new ErrorHandler("Casino not found", 404));
+        }
+        const {
+            founded,
+            licenses,
+            games,
+            payments,
+            bonuses,
+            countries,
+            software,
+            currencies,
+            languages
+        } = req.body;
+
+        // Update stats if any stat field is provided
+        let stats = casino.stats || null;
+        if (founded || licenses || games || payments || bonuses || countries || software || currencies || languages) {
+            stats = {
+                Founded: founded || casino.stats?.Founded || 0,
+                licenses: licenses || casino.stats?.licenses || 0,
+                games: games || casino.stats?.games || 0,
+                payments: payments || casino.stats?.payments || 0,
+                bonuses: bonuses || casino.stats?.bonuses || 0,
+                countries: countries || casino.stats?.countries || 0,
+                software: software || casino.stats?.software || 0,
+                currencies: currencies || casino.stats?.currencies || 0,
+                languages: languages || casino.stats?.languages || 0
+            };
         }
 
         // Handle image update
@@ -120,7 +174,8 @@ export const updateCasino = async (req, res, next) => {
             freeSpins: req.body.freeSpins || casino.freeSpins,
             rating: req.body.rating || casino.rating,
             image: newImage,
-            imagePublicId: newPublicId
+            imagePublicId: newPublicId,
+            stats
         };
 
         const updatedCasino = await Casino.findByIdAndUpdate(id, updatedData, {
