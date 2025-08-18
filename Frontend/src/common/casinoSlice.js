@@ -8,6 +8,12 @@ export const fetchCasinos = createAsyncThunk("casinos/fetchCasinos", async () =>
   const data = await response.json();
   return data.casinos || []; // Adjusted to match backend response
 });
+// Fetch Top Casinos
+export const fetchTopCasinos = createAsyncThunk("casinos/fetchTopCasinos", async () => {
+  const response = await fetch(`${API_URL}/api/top`);
+  const data = await response.json();
+  return data.casinos || []; // Adjusted to match backend response
+});
 
 // Add New Casino
 export const addCasino = createAsyncThunk("casinos/addCasino", async (casinoData) => {
@@ -57,6 +63,10 @@ const casinoSlice = createSlice({
       .addCase(fetchCasinos.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchTopCasinos.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
       })
       .addCase(addCasino.fulfilled, (state, action) => {
         state.data.push(action.payload);

@@ -145,15 +145,8 @@ const Navbar = () => {
               className="inline-flex items-center group"
             >
               <div className="relative">
-                <svg 
-                  className="w-10 h-10 text-yellow-500 transition-transform group-hover:rotate-12" 
-                  viewBox="0 0 24 24" 
-                  fill="currentColor"
-                >
-                  <path d="M12 2L4 12L12 22L20 12L12 2Z" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M12 6L7 12L12 18L17 12L12 6Z" fill="black" />
-                </svg>
-                <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">R</span>
+                <img src="/Logo.png" alt="logo" 
+                className="w-12 h-10"/>
               </div>
               <span className="ml-2 text-2xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 uppercase">
                 Casino

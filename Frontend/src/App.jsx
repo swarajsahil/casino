@@ -40,6 +40,7 @@ function App() {
   const API_URL = import.meta.env.VITE_API_URL;
   const { data:games, loading:gameLoading } = useFetch(`${API_URL}/api/games`);
   const { data:casino, loading:casinoLoading } = useFetch(`${API_URL}/api/casinos`);
+  const { data:topCasino} = useFetch(`${API_URL}/api/top`);
   const dispatch = useDispatch();
   const { blogs, loading:blogLoading } = useSelector((state) => state.blogs);
     const { data:faq } = useSelector((state) => state.faq.data);
@@ -66,7 +67,7 @@ function App() {
               element={
                 <>
                   <Hero />
-                  <LiveCasino data={casino?.casinos?.slice(0,5)} />
+                  <LiveCasino data={topCasino?.casinos?.slice(0,5)} />
                   <div className='flex justify-center items-center py-2'><Link className='border border-black rounded-3xl p-2' to={`/liveCasino`}>SHOW MORE</Link></div>
                   <CustomCarousel data={carouselData}/>
                   <BlogCard data={blogs?.slice(0,3)} loading={blogLoading}/>

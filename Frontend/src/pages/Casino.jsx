@@ -110,7 +110,7 @@ const AddCasino = ({ existingCasino, setEditing }) => {
     const fields = [
       'name', 'description', 'bonus', 'pros', 'metrics',
       'casinoLink', 'bonusLink', 'dealer', 'company','freeSpins','rating',
-
+      'topPosition',
     // Add stats fields
     'founded', 'licenses', 'games', 'payments', 
     'bonuses', 'countries', 'software', 'currencies', 'languages'
@@ -270,6 +270,33 @@ const AddCasino = ({ existingCasino, setEditing }) => {
               className="w-full p-2 border rounded"
               placeholder="Enter Rating"
             />
+          </div>
+          <div className="flex flex-col gap-2 w-full max-w-xs">
+            <label
+              htmlFor="topPosition"
+              className="text-md font-medium text-red-700"
+            >
+              Include in Top 10?
+            </label>
+
+            <select
+              id="topPosition"
+              name="topPosition"
+              value={formData.topPosition || ''}
+              onChange={handleChange}
+              className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="">Not in Top 10</option>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
+                <option
+                  key={num}
+                  value={num}
+                  disabled={false /* change logic if needed */}
+                >
+                  Position {num}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="md:col-span-2">
@@ -469,16 +496,22 @@ const AdminCasino = () => {
           <div className="divide-y divide-gray-200">
             {casinos && casinos?.map((casino) => (
               <React.Fragment key={casino._id}>
-                <div className="grid grid-cols-1 md:grid-cols-14 gap-2 p-3 hover:bg-gray-50 items-center">
+                <div className=" grid grid-cols-1 md:grid-cols-14 gap-2 p-3 hover:bg-gray-50 items-center">
                   {/* Your existing row content remains exactly the same */}
-                  <div className="col-span-1 flex justify-center">
-                    <img 
-                      src={casino.image} 
-                      alt={casino.name} 
-                      className="w-12 h-12 object-cover rounded"
-                    />
+                  <div className="relative col-span-1 flex justify-center">
+                    <div className="relative"> {/* Added container for better positioning control */}
+                      <img
+                        src={casino.image}
+                        alt={casino.name}
+                        className="w-12 h-12 object-cover rounded"
+                      />
+                      {casino.topPosition && (
+                        <div className="absolute top-[-2px] left-[-2px] bg-yellow-500 w-5 h-5 text-white text-xs font-bold flex items-center justify-center rounded-br-sm rounded-tl-sm border border-yellow-600">
+                          {casino.topPosition}
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  
                   <div className="col-span-2 text-center font-medium">
                     {casino.name}
                   </div>
@@ -568,40 +601,40 @@ const AdminCasino = () => {
                 {/* Stats row - appears below each casino row */}
                 {casino.stats && (
                   <div className="col-span-full bg-gray-50 p-3 border-t border-gray-200">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 text-xs">
-                      <div className="flex flex-col">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 text-xs ">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Founded</span>
-                        <span>{casino.stats.Founded}</span>
+                        <span className="text-center">{casino.stats.Founded}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Licenses</span>
                         <span>{casino.stats.licenses}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Games</span>
                         <span>{casino.stats.games}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Payments</span>
                         <span>{casino.stats.payments}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Bonuses</span>
                         <span>{casino.stats.bonuses}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Countries</span>
                         <span>{casino.stats.countries}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Software</span>
                         <span>{casino.stats.software}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Currencies</span>
                         <span>{casino.stats.currencies}</span>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col items-center">
                         <span className="font-semibold">Languages</span>
                         <span>{casino.stats.languages}</span>
                       </div>

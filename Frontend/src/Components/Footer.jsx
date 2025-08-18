@@ -176,7 +176,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12 text-center md:text-left items-center md:items-start">
             {/* About Column */}
             <div className="text-center md:text-left flex flex-col items-center md:items-start">
-              <h3 className="text-lg font-bold text-yellow-400 mb-4">CASINO</h3>
+              <h4 className="text-lg font-bold font-serif text-yellow-400 mb-4">INDIAN CASINO GURU</h4>
               <p className="mb-4 max-w-xs text-sm md:text-base">
                 The premier online gaming destination, offering world-class entertainment with security and fairness guaranteed.
               </p>

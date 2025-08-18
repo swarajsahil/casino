@@ -1,10 +1,13 @@
 import express from "express";
 import { upload } from "../middlewares/multer.js";
-import { addCasino, updateCasino, allCasino, deleteCasino, getCasinoById } from "../controllers/liveCasino.js";
+import { addCasino, updateCasino, allCasino, deleteCasino, getCasinoById, topCasinos } from "../controllers/liveCasino.js";
 
 const router = express.Router();
 
 router.get("/casinos", allCasino);
+// In your routes file
+router.get('/top', topCasinos);
+
 router.get("/casinos/:id", getCasinoById);
 router.post("/newCasino", upload.single("image"), addCasino);
 router

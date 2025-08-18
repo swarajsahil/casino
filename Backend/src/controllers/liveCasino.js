@@ -38,6 +38,7 @@ export const addCasino = async (req, res, next) => {
     try {
         const { name, description, bonus, pros, casinoLink, bonusLink, dealer, company,rating,freeSpins, image: imageUrl,
             // Add these new fields:
+            topPosition,
             founded,
             licenses,
             games,
@@ -51,6 +52,14 @@ export const addCasino = async (req, res, next) => {
 
         let image;
         let imagePublicId = null;
+
+        // Add this to your addCasino and updateCasino functions
+        if (topPosition) {
+            const existing = await Casino.findOne({ topPosition });
+            if (existing && existing._id.toString() !== id) {
+                return next(new ErrorHandler(`Position ${topPosition} is already taken`, 400));
+            }
+        }
 
         if (imageUrl && typeof imageUrl === 'string') {
             image = imageUrl;
@@ -94,7 +103,8 @@ export const addCasino = async (req, res, next) => {
             company,
             image,
             imagePublicId, // Store public ID in database
-            stats
+            stats,
+            topPosition: topPosition || null
         });
 
         res.status(201).json({
@@ -124,8 +134,19 @@ export const updateCasino = async (req, res, next) => {
             countries,
             software,
             currencies,
-            languages
+            languages,
+            topPosition
         } = req.body;
+
+        if (topPosition !== undefined) { // check for undefined, not truthy
+            // If setting to a position (not null/undefined)
+            if (topPosition) {
+                const existing = await Casino.findOne({ topPosition });
+                if (existing && existing._id.toString() !== id) {
+                    return next(new ErrorHandler(`Position ${topPosition} is already taken`, 400));
+                }
+            }
+        }
 
         // Update stats if any stat field is provided
         let stats = casino.stats || null;
@@ -175,6 +196,7 @@ export const updateCasino = async (req, res, next) => {
             rating: req.body.rating || casino.rating,
             image: newImage,
             imagePublicId: newPublicId,
+            topPosition: req.body.topPosition || casino.topPosition,
             stats
         };
 
@@ -217,3 +239,16 @@ export const deleteCasino = async (req, res, next) => {
         next(error);
     }
 };
+export const topCasinos = async (req, res, next) => {
+  try {
+    const casinos = await Casino.find({ topPosition: { $ne: null } })
+                              .sort({ topPosition: 1 })
+                              .limit(10);
+    res.status(200).json({
+      success: true,
+      casinos
+    });
+  } catch (error) {
+    next(error);
+  }
+}

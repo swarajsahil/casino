@@ -2,6 +2,17 @@ import mongoose from "mongoose";
 
 
 const casinoSchema = new mongoose.Schema({
+  topPosition: {
+    type: Number,
+    min: 1,
+    max: 10,
+    required: false,
+    default: null,
+    validate: {
+      validator: Number.isInteger,
+      message: '{VALUE} is not an integer value'
+    }
+  },
   stats: {
     type: {
       Founded: Number,

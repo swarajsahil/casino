@@ -1,4 +1,5 @@
 import { FaShieldAlt, FaGem, FaCoins, FaHandshake, FaMobileAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   return (
@@ -8,10 +9,10 @@ const About = () => {
         <div className="absolute inset-0 bg-black opacity-70"></div>
         <div className="relative max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-yellow-400">
-            ABOUT <span className="text-white">ROYAL SPIN CASINO</span>
+            ABOUT <span className="text-white">INDIAN CASINO GURU</span>
           </h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto">
-            Where premium gaming meets unparalleled rewards since 2010
+            Where premium gaming meets unparalleled rewards since 2020
           </p>
         </div>
       </div>
@@ -26,10 +27,10 @@ const About = () => {
                 Our Story
               </h2>
               <p className="text-lg mb-4">
-                Founded in 2010, Royal Spin Casino emerged from a simple vision: to create the most thrilling and secure online gaming experience in the industry. What began as a small startup has grown into a global phenomenon, serving millions of players across 50+ countries.
+                Founded in 2020, INDIAN CASINO GURU emerged from a simple vision: to create the most thrilling and secure online gaming experience in the industry. What began as a small startup has grown into a global phenomenon, serving millions of players across 50+ countries.
               </p>
               <p className="text-lg mb-4">
-                Our journey has been marked by innovation, from being among the first to implement live dealer games in 2012 to pioneering cryptocurrency payments in 2018.
+                Our journey has been marked by innovation, from being among the first to implement live dealer games in 2021 to pioneering cryptocurrency payments in 2021.
               </p>
               <p className="text-lg">
                 Today, we're proud to be licensed and regulated by the Malta Gaming Authority (MGA) and UK Gambling Commission, offering 2000+ games from top providers like NetEnt, Microgaming, and Evolution Gaming.
@@ -164,15 +165,19 @@ const About = () => {
             Ready to Experience Premium Gaming?
           </h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Join over 10 million players who trust Royal Spin Casino for their online gaming experience.
+            Join over 10 million players who trust INDIAN CASINO GURU for their online gaming experience.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link to="/liveCasino">
             <button className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300">
-              Join Now - Get 200% Bonus
+              Join Now - Get Awesome Bonus
             </button>
+            </Link>
+              <Link to="/freeGames">
             <button className="bg-transparent hover:bg-gray-700 text-white font-bold py-3 px-8 border-2 border-yellow-400 rounded-lg transition duration-300">
               Explore Games
             </button>
+              </Link>
           </div>
         </section>
       </div>
