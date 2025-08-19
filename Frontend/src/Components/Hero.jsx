@@ -65,18 +65,11 @@ const Hero = () => {
           <div className="flex flex-wrap items-center gap-4">
             <Link
               to="/liveCasino"
-              className="relative overflow-hidden bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-bold py-4 px-8 rounded-lg shadow-lg hover:from-yellow-400 hover:to-yellow-500 transition duration-300 group"
+              className="relative overflow-hidden bg-gradient-to-r from-yellow-500 to-yellow-600 text-black font-bold py-3 px-4 rounded-lg shadow-lg hover:from-yellow-400 hover:to-yellow-500 transition duration-300 group"
             >
               <span className="relative z-10">JOIN NOW</span>
               <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="absolute top-0 left-0 w-full h-full border-2 border-yellow-400 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            </Link>
-            
-            <Link
-              to="/promotions"
-              className="relative overflow-hidden bg-transparent text-white font-bold py-4 px-8 rounded-lg shadow-lg border border-white/20 hover:border-yellow-400 hover:text-yellow-400 transition duration-300"
-            >
-              VIEW PROMOTIONS
             </Link>
           </div>
 

@@ -21,7 +21,9 @@ dotenv.config({
 
 // Middleware
 const corsOptions = {
-  origin: ["http://localhost:5173","http://localhost:5174","https://casino-frontend.onrender.com"],
+  origin: ["http://localhost:5173","http://localhost:5174","https://casino-frontend.onrender.com","https://indiancasinoguru.com"
+    ,"www.indiancasinoguru.com"
+  ],
   methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS", // ✅ Ensure PATCH & OPTIONS are allowed
   allowedHeaders: "Content-Type, Authorization , Accept",
   credentials: true,
