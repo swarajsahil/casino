@@ -12,17 +12,24 @@ import FaqRouter from "./routes/faq.js";
 import SubscriptionRouter from "./routes/subscription.js" ;
 import promotionRouter from "./routes/promotion.js";
 import  {errorMiddleware } from "./middlewares/error.js";
-
-const app = express();
+import connectDB from "./data/db.js";
 
 dotenv.config({
     path: './.env'
 })
+const app = express();
+
+// Connect DB
+connectDB();
+
 
 // Middleware
 const corsOptions = {
-  origin: ["http://localhost:5173","http://localhost:5174","https://casino-frontend.onrender.com","https://indiancasinoguru.com"
-    ,"www.indiancasinoguru.com"
+  origin: ["http://localhost:5173",
+    "http://localhost:5174",
+    "https://casino-frontend.onrender.com",
+    "https://indiancasinoguru.com",
+    "www.indiancasinoguru.com"
   ],
   methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS", // ✅ Ensure PATCH & OPTIONS are allowed
   allowedHeaders: "Content-Type, Authorization , Accept",
