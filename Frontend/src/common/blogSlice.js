@@ -85,6 +85,10 @@ const blogSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       })
+      .addCase(fetchBlogsById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedBlog = action.payload;  // Store all blogs here
+      })
       .addCase(addBlog.fulfilled, (state, action) => {
         state.allBlogs.unshift(action.payload); // Add to allBlogs
       })

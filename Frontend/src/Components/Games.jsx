@@ -134,13 +134,6 @@ const Games = ({ data, loading }) => {
           </div>
         ))}
       </div>
-      
-      {/* Load More Button */}
-      <div className="max-w-7xl mx-auto mt-12 text-center">
-        <button className="px-6 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-900 transition-colors duration-200 shadow-md hover:shadow-lg">
-          Load More Games
-        </button>
-      </div>
     </div>
   );
 };

@@ -157,6 +157,15 @@ const Navbar = () => {
             <ul className="hidden lg:flex items-center space-x-8">
               <li>
                 <Link 
+                  to="/" 
+                  className="relative font-medium text-white hover:text-yellow-400 transition-colors group"
+                >
+                  Home
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-500 transition-all group-hover:w-full"></span>
+                </Link>
+              </li>
+              <li>
+                <Link 
                   to="/liveCasino" 
                   className="relative font-medium text-white hover:text-yellow-400 transition-colors group"
                 >
@@ -240,6 +249,15 @@ const Navbar = () => {
           {isMenuOpen && (
             <div className="absolute left-0 right-0 mt-2 py-4 px-6 bg-gray-900/95 backdrop-blur-sm border-t border-gray-700 rounded-b-lg shadow-xl lg:hidden">
               <ul className="space-y-4">
+                <li>
+                  <Link 
+                    to="/" 
+                    className="block py-2 text-lg font-medium text-white hover:text-yellow-400 transition-colors border-b border-gray-800" 
+                    onClick={handleMenuClose}
+                  >
+                    Home
+                  </Link>
+                </li>
                 <li>
                   <Link 
                     to="/liveCasino" 
